@@ -4,6 +4,8 @@ Portafolio de Juan David Cova, desarrollador full stack. Proyectos reales con el
 
 React Router (prerender estático) + TypeScript + Tailwind CSS, desplegado en Vercel.
 
+**En vivo:** https://jdc-digital-portfolio.vercel.app
+
 ## Empezar
 
 ```bash
