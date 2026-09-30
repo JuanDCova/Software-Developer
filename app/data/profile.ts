@@ -20,9 +20,9 @@ export const profile = {
     "Desarrollo software: empecé en SENNOVA, el sistema de investigación e innovación del SENA, y hoy soy desarrollador en la Corporación Unicorsalud mientras curso octavo semestre de Ingeniería de Sistemas.",
     "Me adapto a lo que el proyecto necesite: crear un sistema desde cero, mantener y refactorizar uno existente, implementarlo o sumarme al frontend o al backend. Trabajo sobre todo con Django, React y TypeScript, y aprendo rápido lo que haga falta para el siguiente desafío.",
   ],
-  /** Cómo trabajo con IA. Se dice de frente porque el historial de git lo muestra. */
+  /** Experiencia integrando IA dentro del software (asistentes en SGTAL y Nexora). */
   aiStatement:
-    "Uso asistentes de IA como parte de mi flujo de trabajo y también los integro en los productos. Defino la arquitectura y los criterios, reviso cada cambio y respondo por el resultado. En cada proyecto indico qué parte hice yo.",
+    "Integro inteligencia artificial dentro del software para que haga trabajo real: asistentes que responden las preguntas de los usuarios, automatización de tareas repetitivas y apoyo para resolver problemas. Ya lo apliqué en SGTAL y en Nexora, conectando los modelos con los datos y las reglas de cada negocio de forma segura.",
   principles: [
     {
       title: "La lógica vive en servicios",
@@ -44,6 +44,7 @@ export const profile = {
   competencies: [
     "Desarrollo web full stack",
     "Mantenimiento y refactorización",
+    "Integración de IA en software",
     "Gestión de bases de datos",
     "Análisis de requerimientos",
     "Documentación técnica",

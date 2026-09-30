@@ -1,4 +1,4 @@
-import { ArrowRight, Database, Stack, Vault } from "@phosphor-icons/react";
+import { ArrowRight, Database, Sparkle, Stack, Vault } from "@phosphor-icons/react";
 
 import { ButtonLink } from "~/components/common/button-link";
 import { StairHeading } from "~/components/common/section";
@@ -39,9 +39,13 @@ export function About() {
       </div>
 
       <div className="mx-auto w-full max-w-[90rem] px-[clamp(20px,9vw,118px)] pb-[clamp(60px,8vw,110px)]">
-        <p className="reveal max-w-[62ch] border-l-4 border-accent bg-accent-soft p-6 leading-relaxed text-ink chamfer-lg">
-          {profile.aiStatement}
-        </p>
+        <div className="reveal max-w-[68ch] border-l-4 border-accent bg-accent-soft p-6 chamfer-lg md:p-8">
+          <h3 className="flex items-center gap-3 font-display text-sm font-bold tracking-[0.14em] text-ink uppercase">
+            <Sparkle size={20} weight="fill" aria-hidden="true" className="text-accent-display" />
+            Inteligencia artificial aplicada
+          </h3>
+          <p className="mt-3 leading-relaxed text-ink">{profile.aiStatement}</p>
+        </div>
 
         <ul className="mt-14 grid gap-10 md:grid-cols-3" aria-label="Principios de trabajo">
           {profile.principles.map((principle, index) => {

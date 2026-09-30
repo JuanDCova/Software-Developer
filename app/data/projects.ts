@@ -237,6 +237,7 @@ export const projects: Project[] = [
       "Notificaciones, búsqueda, planes y cuotas por institución.",
       "Roles de colegio, recuperación de cuenta, consentimiento de datos personales (Ley 1581) y carga masiva de usuarios desde Excel o CSV.",
       "Panel docente con métricas de notas y edición de calificaciones.",
+      "Chat con IA integrado en la plataforma.",
     ],
     team: "Proyecto propio.",
     aiAssisted:
