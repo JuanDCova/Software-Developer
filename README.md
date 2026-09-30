@@ -48,4 +48,14 @@ Nada inventado: lo que falta confirmar se muestra como pendiente y el sitio se p
 
 ## Deploy
 
+El repositorio está conectado a Vercel: **cada push a `main` se publica solo** y cada Pull Request recibe una URL de vista previa.
+
+| Comando                  | Qué hace                                                                                         |
+| ------------------------ | ------------------------------------------------------------------------------------------------ |
+| `npm run release`        | Lint, tipos y pruebas; si todo pasa, `git push origin main` y Vercel publica                     |
+| `npm run deploy:preview` | Sube la carpeta local a una URL de prueba, sin tocar producción                                  |
+| `npm run deploy`         | Build y publicación directa a producción desde la terminal (se salta el CI; solo para urgencias) |
+
+Antes de `release`, haz commit de tus cambios. La primera vez en un equipo nuevo: `npx vercel login`.
+
 Vercel con `vercel.json`: comando `npm run build`, salida `build/client`. La URL de producción se toma de `VERCEL_PROJECT_PRODUCTION_URL`, o de `VITE_SITE_URL` si se define.

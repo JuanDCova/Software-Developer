@@ -8,7 +8,7 @@ React Router en modo framework con `ssr: false` + `prerender` (ver `docs/adr/000
 
 ## Comandos
 
-`npm run dev`, `npm run typecheck`, `npm run lint`, `npm run test`, `npm run build`, `npm run test:e2e` (hace falta build), `npm run lhci`, `npm run poster` (SVG de la red), `npm run og` (regenera `public/og.png`).
+`npm run dev`, `npm run typecheck`, `npm run lint`, `npm run test`, `npm run build`, `npm run test:e2e` (hace falta build), `npm run lhci`, `npm run poster` (SVG de la red), `npm run og` (regenera `public/og.png`). Publicar: `npm run release` (verifica y hace push; Vercel despliega solo), `npm run deploy:preview`, `npm run deploy`.
 
 ## Reglas
 
