@@ -9,7 +9,7 @@ const principleIcons = [Stack, Database, Vault];
 
 /**
  * Sobre mí al estilo de la referencia: texto a la izquierda y la foto pegada al
- * borde derecho de la pantalla, teñida de cian (se destiñe al pasar el cursor).
+ * borde derecho de la pantalla, a color natural con marco cian desplazado.
  */
 export function About() {
   return (

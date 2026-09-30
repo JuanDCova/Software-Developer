@@ -13,7 +13,7 @@ Juan David pidió que el sitio se viera más tecnológico y que los colores oscu
 - Quantico para titulares, navegación y botones; Geist para párrafos (legibilidad) y Geist Mono para lo técnico.
 - Titulares escalonados (`StairHeading`), esquinas rectas y chaflanes (`chamfer`, `chamfer-lg`, `chamfer-xl`).
 - **Sin los videos de la referencia.** Están alojados en un CDN de terceros sin licencia conocida y pesan 5 MB. En su lugar, la red de nodos propia: escena 3D en escritorio y un SVG generado con los mismos datos (`npm run poster`) en mobile y mientras carga.
-- La foto pasa del hero a "Sobre mí", pegada al borde derecho y teñida de cian con `mix-blend-mode: hue` (como el video teñido de la referencia); se ve a color al pasar el cursor.
+- La foto pasa del hero a "Sobre mí", pegada al borde derecho. Primero se probó teñirla de cian con `mix-blend-mode: hue` (como el video de la referencia), pero alteraba el tono de piel y se veía poco profesional. Ahora va a color natural, sin filtros, con recorte en chaflán, un marco cian desplazado detrás, sombra teñida y parallax de dos capas en escritorio. La marca la pone la composición, no el color de la foto.
 - `/cv` reproduce la estructura de la hoja de vida de Juan David (barra lateral y columna principal) y se imprime en A4. Las referencias no se publican: tienen datos de contacto de terceros.
 
 ## Consecuencias
