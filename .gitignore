@@ -27,3 +27,5 @@ test-results/
 
 # Documentos personales con datos de terceros (referencias, teléfonos)
 HDV _D.pdf
+.vercel
+.env*
