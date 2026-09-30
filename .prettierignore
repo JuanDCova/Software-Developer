@@ -1,0 +1,9 @@
+build
+.react-router
+node_modules
+.agents
+package-lock.json
+playwright-report
+test-results
+.lighthouseci
+*.pdf

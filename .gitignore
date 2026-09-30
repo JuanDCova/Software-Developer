@@ -1,0 +1,26 @@
+# Skills instaladas desde skills-lock.json
+# No commitear skills, solo el lockfile (restaurar con: npx skills experimental_install)
+.agents/skills/
+.claude/skills/
+.opencode/skills/
+.opencode/skill/
+.cursor/skills/
+.codex/skills/
+.windsurf/skills/
+.gemini/skills/
+.antigravity/skills/
+
+# Dependencias y build
+node_modules/
+build/
+.react-router/
+
+# Entorno
+.env
+.env.*
+!.env.example
+
+# Pruebas
+playwright-report/
+test-results/
+.lighthouseci/
