@@ -1,39 +1,64 @@
-import { EnvelopeSimple, FileText, GithubLogo, LinkedinLogo } from "@phosphor-icons/react";
+import {
+  Check,
+  Copy,
+  EnvelopeSimple,
+  FileText,
+  GithubLogo,
+  LinkedinLogo,
+} from "@phosphor-icons/react";
 import type { Icon } from "@phosphor-icons/react";
+import { useState } from "react";
 import { Link } from "react-router";
 
-import { Pending } from "~/components/common/pending";
 import { profile } from "~/data/profile";
 
 interface ContactLink {
   label: string;
-  href: string | null;
+  href: string;
   display: string;
   icon: Icon;
   internal?: boolean;
 }
 
+const { email, linkedin, github } = profile.links;
+
 const contactLinks: ContactLink[] = [
-  {
-    label: "Correo",
-    href: profile.links.email ? `mailto:${profile.links.email}` : null,
-    display: profile.links.email ?? "",
-    icon: EnvelopeSimple,
-  },
-  {
-    label: "LinkedIn",
-    href: profile.links.linkedin,
-    display: "Perfil de LinkedIn",
-    icon: LinkedinLogo,
-  },
-  {
-    label: "GitHub",
-    href: profile.links.github,
-    display: "github.com/JuanDCova",
-    icon: GithubLogo,
-  },
+  { label: "LinkedIn", href: linkedin, display: "juancovasoftwaredeveloper", icon: LinkedinLogo },
+  { label: "GitHub", href: github, display: "github.com/JuanDCova", icon: GithubLogo },
   { label: "CV", href: "/cv", display: "Versión imprimible", icon: FileText, internal: true },
 ];
+
+const itemClass =
+  "flex min-h-16 items-center gap-4 rounded-component border border-current/20 px-5 py-4 transition-colors hover:bg-current/10";
+
+/** Copia el correo al portapapeles con confirmación visible y anunciada. */
+function CopyEmail() {
+  const [copied, setCopied] = useState(false);
+
+  const copy = async () => {
+    try {
+      await navigator.clipboard.writeText(email);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      window.location.href = `mailto:${email}`;
+    }
+  };
+
+  return (
+    <button
+      type="button"
+      onClick={copy}
+      className="inline-flex size-12 shrink-0 items-center justify-center rounded-component border border-current/20 transition-colors hover:bg-current/10 active:scale-[0.96]"
+      aria-label={copied ? "Correo copiado" : "Copiar correo"}
+    >
+      {copied ? <Check size={20} aria-hidden="true" /> : <Copy size={20} aria-hidden="true" />}
+      <span className="sr-only" aria-live="polite">
+        {copied ? "Correo copiado al portapapeles" : ""}
+      </span>
+    </button>
+  );
+}
 
 export function Contact() {
   return (
@@ -53,48 +78,37 @@ export function Contact() {
           Si tu equipo construye sistemas de gestión con Django y React, me interesa conversar.
         </p>
 
-        <ul className="mt-12 grid gap-4 sm:grid-cols-2">
+        <div className="mt-12 flex items-center gap-3">
+          <a
+            href={`mailto:${email}`}
+            className={`${itemClass} min-w-0 flex-1 font-display text-base font-semibold sm:text-2xl`}
+          >
+            <EnvelopeSimple size={24} aria-hidden="true" className="shrink-0" />
+            <span className="truncate">{email}</span>
+          </a>
+          <CopyEmail />
+        </div>
+
+        <ul className="mt-4 grid gap-4 sm:grid-cols-3">
           {contactLinks.map((item) => {
             const Glyph = item.icon;
             const content = (
               <>
                 <Glyph size={22} aria-hidden="true" className="shrink-0" />
-                <span className="flex flex-col">
+                <span className="flex min-w-0 flex-col">
                   <span className="text-sm opacity-70">{item.label}</span>
-                  <span className="font-medium">{item.display}</span>
+                  <span className="truncate font-medium">{item.display}</span>
                 </span>
               </>
             );
-            const itemClass =
-              "flex min-h-16 items-center gap-4 rounded-component border border-current/20 px-5 py-4";
-
-            if (!item.href) {
-              return (
-                <li key={item.label} className={itemClass}>
-                  <Glyph size={22} aria-hidden="true" className="shrink-0 opacity-60" />
-                  <span className="flex flex-col gap-1">
-                    <span className="text-sm opacity-70">{item.label}</span>
-                    <Pending label={item.label} inverse />
-                  </span>
-                </li>
-              );
-            }
             return (
               <li key={item.label}>
                 {item.internal ? (
-                  <Link
-                    to={item.href}
-                    className={`${itemClass} transition-colors hover:bg-current/10`}
-                  >
+                  <Link to={item.href} className={itemClass}>
                     {content}
                   </Link>
                 ) : (
-                  <a
-                    href={item.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    className={`${itemClass} transition-colors hover:bg-current/10`}
-                  >
+                  <a href={item.href} target="_blank" rel="noreferrer" className={itemClass}>
                     {content}
                   </a>
                 )}

@@ -11,7 +11,7 @@ export const site = {
    * Mientras falte contenido por confirmar (ver docs/CONTENIDO_PENDIENTE.md)
    * el sitio pide a los buscadores que no lo indexen.
    */
-  indexable: false,
+  indexable: true,
 } as const;
 
 export const navLinks = [

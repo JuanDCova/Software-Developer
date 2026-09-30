@@ -11,16 +11,16 @@ import type { Project, ProjectStatus } from "./types";
  */
 export const projects: Project[] = [
   {
-    id: "erp-unicorsalud",
-    slug: "erp-unicorsalud",
-    title: "ERP UC",
-    subtitle: "ERP institucional de Unicorsalud",
+    id: "erp-educacion-superior",
+    slug: "erp-educacion-superior",
+    title: "ERP Universitario",
+    subtitle: "Producto ERP para instituciones de educación superior",
     description:
-      "Sistema institucional que integra procesos académicos, contratación, contabilidad, facturación, requisiciones, admisiones y pagos.",
+      "ERP que sistematiza una institución completa: académico, admisiones, contratación, contabilidad, tesorería, nómina, marketing y pagos, con un componente académico pensado para universidades.",
     longDescription:
-      "ERP construido por un equipo de cuatro desarrolladores sobre Django REST y React. Empezó como un sistema contable y hoy reúne los flujos académicos y administrativos de la institución. Mi trabajo se concentró en el módulo académico, los estudiantes y sus calificaciones, los reportes en PDF y la seguridad de sesiones.",
+      "Nació como el sistema institucional de la Corporación Unicorsalud y evolucionó a un producto configurable para cualquier institución de educación superior: nombre, NIT, representante legal, logos y colores se definen por configuración. Lo construimos cuatro desarrolladores. Mi trabajo se concentró en el componente académico, los estudiantes y sus calificaciones, los reportes en PDF y la seguridad de sesiones.",
     year: 2026,
-    category: "ERP institucional",
+    category: "ERP para universidades",
     technologies: [
       "Python",
       "Django",
@@ -41,31 +41,31 @@ export const projects: Project[] = [
     featured: true,
     status: "en-desarrollo",
     problem:
-      "La institución necesitaba reunir en un solo sistema procesos que vivían por separado: programas y horarios, contratación docente, contabilidad, cuentas de cobro, requisiciones, admisiones y pagos en línea.",
+      "Las universidades manejan procesos que casi nunca viven en un mismo sistema: programas, pensums y horarios, admisiones y matrícula, contratación docente, contabilidad, tesorería, nómina y pagos en línea. Los ERP genéricos no entienden la parte académica.",
     solution:
-      "Un backend Django REST organizado en una app por dominio del negocio y un frontend React con TypeScript por módulos. Autenticación con JWT, roles y soporte opcional para Active Directory, tareas asíncronas con Celery y archivos en almacenamiento compatible con S3.",
+      "Un backend Django REST con una app por dominio del negocio y un frontend React con TypeScript por módulos. Roles y permisos granulares, JWT con soporte opcional para Active Directory, tareas asíncronas con Celery, documentos PDF parametrizados y marca configurable por institución.",
     role: "Desarrollador full stack",
     myRole: [
-      "Módulo académico: grupos, cargas académicas, horarios por docente, consulta de horarios por aula y dashboard académico.",
+      "Componente académico: grupos, cargas académicas, horarios por docente, consulta de horarios por aula y dashboard académico.",
       "Módulo de estudiantes: calificaciones por docente, notas y listas de asistencia.",
       "Reportes en PDF de notas y beneficios, con interfaz de impresión en el frontend.",
       "Seguridad: versionado de tokens JWT para invalidar sesiones cuando cambia el rol de un usuario y API de aprovisionamiento de usuarios.",
       "Admisión y matrícula; beneficios, descuentos y cuentas bancarias en los conceptos de pago.",
     ],
-    team: "Equipo de 4 desarrolladores con ramas por funcionalidad y revisión antes de integrar a develop.",
+    team: "Equipo de 4 desarrolladores con ramas por funcionalidad y revisión antes de integrar.",
     confidential: true,
     features: [
-      "Académico: programas, asignaturas, pensums, aulas, sedes y cargas académicas.",
+      "Académico: programas, asignaturas, pensums, sedes, aulas, cargas académicas, horarios y calificaciones.",
+      "Admisiones, matrícula y seguimiento de aspirantes con marketing y alertas.",
       "Contratación con flujo de revisión por contabilidad, rectoría y presidencia, y contratos en PDF.",
-      "Contabilidad: PUC, terceros, centros de costo, comprobantes y periodos.",
-      "Cuentas de cobro y requisiciones con flujos de aprobación.",
-      "Admisiones y seguimiento de aspirantes.",
-      "Pagos en línea con ePayco.",
+      "Contabilidad con PUC, terceros, centros de costo y periodos; tesorería, facturación y nómina.",
+      "Requisiciones con flujo de aprobación, inventario, planeación y auditoría.",
+      "Pagos en línea con ePayco y asistente de analítica con IA para directivos.",
     ],
     challenges: [
       "Revocar la sesión de un usuario en cuanto cambian sus permisos, sin cerrar la sesión de todos los demás.",
       "Que las fechas y los datos de los documentos PDF coincidan siempre con lo registrado en el sistema.",
-      "Trabajar en paralelo con otros tres desarrolladores sobre los mismos modelos sin romper migraciones.",
+      "Pasar de un sistema hecho para una institución a un producto configurable sin romper lo que ya funcionaba.",
     ],
     results: [],
     architecture: {
@@ -78,19 +78,20 @@ export const projects: Project[] = [
         {
           name: "API",
           tech: "Django REST Framework, Simple JWT",
-          nodes: ["Autenticación y roles", "Active Directory opcional"],
+          nodes: ["Autenticación y roles", "Active Directory opcional", "Marca por institución"],
         },
         {
           name: "Dominio",
           tech: "Una app de Django por área",
           nodes: [
             "Académico",
+            "Admisiones",
             "Contratación",
             "Contabilidad y PUC",
-            "Facturación",
-            "Requisiciones",
-            "Admisiones",
-            "Pasarela de pago",
+            "Tesorería",
+            "Nómina",
+            "Marketing",
+            "Pagos",
           ],
         },
         {
@@ -100,8 +101,8 @@ export const projects: Project[] = [
         },
       ],
       decisions: [
-        "Una app de Django por dominio del negocio, para que cada equipo trabaje en su área.",
-        "Seeds organizados por dominio y por escenario para levantar entornos locales repetibles.",
+        "Una app de Django por dominio del negocio, para que cada desarrollador trabaje en su área.",
+        "Marca, datos legales y colores por variables de entorno: el mismo producto sirve a otra institución.",
         "Versión del token guardada por usuario: cambiar un rol invalida sus sesiones activas.",
       ],
     },
@@ -145,6 +146,7 @@ export const projects: Project[] = [
       "Documento de arquitectura, modelo de datos y reglas del negocio.",
       "Backend Django REST con capa de servicios transaccional y acciones de negocio explícitas, como despachar una orden.",
       "Frontend React con TypeScript, escáner QR y mapa de eventos.",
+      "Integración de una API de IA como asistente para los usuarios de la plataforma.",
       "Contenedores con Docker Compose y Nginx, tareas programadas con Celery y pipeline de integración continua.",
     ],
     team: "Proyecto propio, autor único.",
@@ -156,6 +158,7 @@ export const projects: Project[] = [
       "Consumo de insumos por orden, lugar y fecha, con devolución de sobrantes.",
       "Mantenimiento preventivo por días o usos y correctivo automático.",
       "Novedades con evidencias, bajas con aprobación, auditoría y reportes.",
+      "Asistente con IA que responde en lenguaje natural las preguntas de quienes usan la plataforma.",
     ],
     challenges: [
       "Impedir que un equipo se reserve dos veces en fechas que se cruzan, incluso con solicitudes simultáneas: restricción EXCLUDE sobre rangos de tiempo en PostgreSQL.",
@@ -168,7 +171,7 @@ export const projects: Project[] = [
         {
           name: "Cliente",
           tech: "React, TypeScript, Vite",
-          nodes: ["Escáner QR", "Mapa de eventos", "Alertas"],
+          nodes: ["Escáner QR", "Mapa de eventos", "Alertas", "Asistente IA"],
         },
         {
           name: "Borde",

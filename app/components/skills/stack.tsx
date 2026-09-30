@@ -3,10 +3,12 @@ import { Link } from "react-router";
 import { Section } from "~/components/common/section";
 import { projectsUsing, skills } from "~/data/skills";
 
+import { TechnologyNetwork } from "./technology-network";
+
 /**
  * Stack sin porcentajes: cada tecnología muestra los proyectos donde se usó.
- * Es la versión accesible de la Technology Network de la spec; la red visual
- * se monta sobre estos mismos datos en la tanda de motion.
+ * Arriba va la red de tecnologías (escritorio); las listas son la versión
+ * accesible y la única vista en mobile.
  */
 export function Stack() {
   return (
@@ -15,6 +17,9 @@ export function Stack() {
       title="Stack"
       lead="Sin porcentajes de dominio. Cada tecnología enlaza a los proyectos donde la usé."
     >
+      <div className="reveal mb-16 md:mb-24">
+        <TechnologyNetwork />
+      </div>
       <div className="grid gap-x-10 gap-y-12 sm:grid-cols-2 xl:grid-cols-4">
         {skills.map((category) => (
           <div key={category.id} className="reveal">

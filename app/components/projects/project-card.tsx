@@ -40,7 +40,10 @@ export function ProjectCard({
     >
       {project.architecture && project.image === null ? (
         <div className="p-4 pb-0 sm:p-6 sm:pb-0">
-          <ArchitectureDiagram architecture={project.architecture} compact={size !== "large"} />
+          <ArchitectureDiagram
+            architecture={project.architecture}
+            variant={size === "large" ? "full" : "compact"}
+          />
         </div>
       ) : null}
 

@@ -1,31 +1,54 @@
+import { useRef } from "react";
+
 import { profile } from "~/data/profile";
+import { useMotion } from "~/motion/use-motion";
+
+const { basePath, alt } = profile.photo;
+const sizes = "(min-width: 768px) 36vw, 80vw";
+const srcSet = (format: string) => `${basePath}-480.${format} 480w, ${basePath}-800.${format} 800w`;
 
 /**
- * Espacio de la fotografía personal. Mientras no exista la foto real se
- * muestra un espacio reservado explícito, nunca una imagen de relleno.
+ * Fotografía integrada a la composición: recorte 4:5, revelado con máscara al
+ * cargar (CSS), grain fijo y parallax suave al hacer scroll (solo escritorio).
  */
 export function PhotoFrame() {
-  if (!profile.photo) {
-    return (
-      <div className="relative flex aspect-[4/5] w-full flex-col items-center justify-center overflow-hidden rounded-visual border border-dashed border-line-strong bg-surface-2 p-8 text-center">
-        <p className="font-display text-6xl font-bold tracking-tight text-ink-soft">JDC</p>
-        <p className="mt-4 max-w-[26ch] text-sm leading-relaxed text-ink-soft">
-          Aquí va la fotografía de Juan David con el tratamiento final. Pendiente de entrega.
-        </p>
-      </div>
-    );
-  }
+  const frameRef = useRef<HTMLDivElement>(null);
+
+  useMotion(frameRef, ({ gsap, DESKTOP_MOTION }, mm, root) => {
+    mm.add(DESKTOP_MOTION, () => {
+      const image = root.querySelector("img");
+      if (!image) return;
+      gsap.fromTo(
+        image,
+        { yPercent: -4, scale: 1.1 },
+        {
+          yPercent: 6,
+          scale: 1.1,
+          ease: "none",
+          scrollTrigger: { trigger: root, start: "top top+=96", end: "bottom top", scrub: true },
+        },
+      );
+    });
+  });
 
   return (
-    <div className="relative aspect-[4/5] w-full overflow-hidden rounded-visual border border-line">
-      <img
-        src={profile.photo}
-        alt={`${profile.name}, desarrollador full stack`}
-        width={800}
-        height={1000}
-        fetchPriority="high"
-        className="size-full object-cover"
-      />
+    <div
+      ref={frameRef}
+      className="photo-reveal grain relative aspect-[4/5] w-full overflow-hidden rounded-visual bg-surface-2 shadow-[0_40px_80px_-40px_rgb(15_23_42/0.45)]"
+    >
+      <picture>
+        <source type="image/avif" srcSet={srcSet("avif")} sizes={sizes} />
+        <source type="image/webp" srcSet={srcSet("webp")} sizes={sizes} />
+        <img
+          src={`${basePath}-800.webp`}
+          alt={alt}
+          width={800}
+          height={1000}
+          fetchPriority="high"
+          decoding="async"
+          className="size-full object-cover will-change-transform"
+        />
+      </picture>
     </div>
   );
 }

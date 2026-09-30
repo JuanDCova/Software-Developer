@@ -39,8 +39,12 @@ export default function Cv() {
             <a href={profile.links.github} className="underline underline-offset-4">
               github.com/JuanDCova
             </a>
-            {profile.links.email ?? <Pending label="Correo" />}
-            {profile.links.linkedin ?? <Pending label="LinkedIn" />}
+            <a href={`mailto:${profile.links.email}`} className="underline underline-offset-4">
+              {profile.links.email}
+            </a>
+            <a href={profile.links.linkedin} className="underline underline-offset-4">
+              linkedin.com/in/juancovasoftwaredeveloper
+            </a>
           </p>
         </header>
         <button
@@ -64,11 +68,9 @@ export default function Cv() {
             {experience.map((entry) => (
               <li key={entry.id}>
                 <p className="font-semibold">
-                  {entry.organization}
+                  {entry.role ?? <Pending label="Cargo" />}
                   <span className="font-normal text-ink-soft">
-                    {" "}
-                    {entry.role ?? <Pending label="Cargo" />}{" "}
-                    {entry.period ?? <Pending label="Periodo" />}
+                    , {entry.organization}. {entry.period ?? <Pending label="Periodo" />}
                   </span>
                 </p>
                 <p className="mt-1 max-w-[70ch] leading-relaxed text-ink-soft">{entry.summary}</p>
@@ -105,7 +107,20 @@ export default function Cv() {
         </CvSection>
 
         <CvSection title="Formación">
-          <Pending label="Formación académica" />
+          <ul className="space-y-4">
+            {profile.education.map((item) => (
+              <li key={item.program}>
+                <p className="font-semibold">{item.program}</p>
+                <p className="text-ink-soft">
+                  {item.institution}. {item.status}.
+                </p>
+              </li>
+            ))}
+          </ul>
+        </CvSection>
+
+        <CvSection title="Idiomas">
+          <p className="text-ink-soft">{profile.languages.join(". ")}.</p>
         </CvSection>
       </div>
     </div>

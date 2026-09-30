@@ -1,41 +1,24 @@
 # Contenido pendiente
 
-Lo confirma o entrega Juan David antes de publicar. Mientras falte algo, `site.indexable` sigue en `false` (meta `noindex`) y la interfaz muestra "por confirmar" donde corresponde. No se inventa nada: cargos, fechas, métricas, enlaces ni capturas.
+El sitio ya está completo y se publica indexable (`site.indexable = true`). Lo que queda aquí mejora el portafolio, pero no bloquea la publicación.
 
-## Identidad y contacto
+## Hecho
 
-- [ ] Foto real (vertical, buena luz, fondo simple). Va en `public/` y su ruta en `profile.photo` (`app/data/profile.ts`).
-- [ ] Correo público para reclutadores (`profile.links.email`). El correo institucional no se usa.
-- [ ] URL de LinkedIn (`profile.links.linkedin`).
-- [ ] Formación académica para `/cv`.
+- [x] Foto (recortada 4:5, AVIF y WebP en `public/img/`; original en `docs/assets/`).
+- [x] Correo, LinkedIn y GitHub.
+- [x] Formación, idiomas y experiencia (tomados de la hoja de vida).
+- [x] ERP presentado como producto para instituciones de educación superior.
+- [x] Asistente de IA en SGTAL.
 
-## Experiencia (no se puede deducir de los repositorios)
+## Pendiente
 
-- [ ] Cargo y periodo en Unicorsalud (`app/data/experience.ts`).
-- [ ] Periodo y forma de trabajo en los proyectos independientes (freelance, por contrato, propios).
-
-## Revisar lo que escribí a partir de los repositorios
-
-- [ ] Tu rol en cada proyecto (`myRole` en `app/data/projects.ts`). Lo saqué de tus commits; corrige lo que no sea exacto.
-- [ ] La frase sobre cómo trabajas con IA (`profile.aiStatement`) y los avisos `aiAssisted` de Nexora, Palatsi y este portafolio.
-- [ ] SGTAL: el historial tiene solo 6 commits tuyos y no muestra uso de IA. Si usaste IA, hay que decirlo igual que en los demás.
-- [ ] Estado real de cada proyecto (hoy todos dicen "En desarrollo"). Si el ERP UC está en producción, cámbialo.
-- [ ] Palatsi y Pracxu: ¿son clientes reales? ¿Se puede nombrar a la marca?
-- [ ] `ERP-prototype-product`: parece la versión producto del ERP UC (identidad "Nimbus"). ¿Lo incluimos como proyecto aparte o como parte del ERP?
-
-## Permisos y privacidad
-
-- [ ] Permiso de Unicorsalud para mostrar el ERP (hoy marcado como confidencial: sin repositorio ni capturas).
-- [ ] Permiso de Palatsi (también confidencial).
-- [ ] Qué repositorios pueden quedar públicos para enlazarlos (`github` en cada proyecto). Hoy solo se enlaza el de este portafolio.
-- [ ] Autorización para levantar cada proyecto con sus datos demo y tomar capturas (sin datos reales de personas).
-
-## Métricas
-
-- [ ] Resultados comprobables por proyecto (`results`). Ejemplos válidos: usuarios activos, procesos que dejaron de hacerse a mano, tiempo ahorrado medido. Si no hay base real, queda vacío.
-
-## Publicación
-
-- [ ] Conectar el repositorio a Vercel (o autorizar que lo haga con la CLI).
+- [ ] Capturas de cada proyecto con datos demo (sin datos reales de personas). Van en `public/proyectos/<slug>/` y en `image` / `gallery` de `app/data/projects.ts`.
+- [ ] Métricas comprobables por proyecto (`results`). Si no hay base real, queda vacío y la página lo dice.
+- [ ] Decidir qué repositorios pueden ser públicos para enlazarlos (`github` en cada proyecto). Hoy solo se enlaza este portafolio; el ERP y Palatsi están marcados como confidenciales.
+- [ ] El código del asistente de IA de SGTAL no aparece todavía en el repositorio `GCAL`: súbelo para que un entrevistador lo pueda verificar.
+- [ ] Palatsi: confirmar si se puede nombrar a la marca.
 - [ ] Dominio propio (opcional).
-- [ ] Cuando todo lo anterior esté listo: `site.indexable = true` en `app/config/site.ts`.
+
+## Privacidad
+
+La hoja de vida (`HDV _D.pdf`) no se sube al repositorio: tiene teléfonos y correos de tus referencias. El teléfono tampoco se publica en el sitio; el contacto es por correo y LinkedIn.

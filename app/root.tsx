@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import type { ReactNode } from "react";
 import {
   isRouteErrorResponse,
@@ -6,6 +7,7 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLocation,
 } from "react-router";
 
 import type { Route } from "./+types/root";
@@ -15,11 +17,21 @@ import { NotFound } from "~/routes/404";
 import { personJsonLd } from "~/utils/seo";
 import { themeInitScript } from "~/utils/theme";
 
+import spaceGrotesk from "../node_modules/@fontsource-variable/space-grotesk/files/space-grotesk-latin-wght-normal.woff2?url";
+
 import "./styles/globals.css";
 
 export const links: Route.LinksFunction = () => [
   { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
   { rel: "manifest", href: "/manifest.webmanifest" },
+  // La fuente de titulares usa font-display: optional; con preload llega antes del primer pintado.
+  ...[spaceGrotesk].map((href) => ({
+    rel: "preload",
+    href,
+    as: "font",
+    type: "font/woff2",
+    crossOrigin: "anonymous" as const,
+  })),
 ];
 
 export function Layout({ children }: { children: ReactNode }) {
@@ -53,7 +65,35 @@ export function Layout({ children }: { children: ReactNode }) {
   );
 }
 
+/** Scroll suave (Lenis + ScrollTrigger) cargado en diferido, solo en escritorio. */
+function useSmoothScroll() {
+  const { pathname } = useLocation();
+  const firstRender = useRef(true);
+
+  useEffect(() => {
+    let stop: (() => void) | undefined;
+    let cancelled = false;
+    import("~/motion/gsap").then(({ startSmoothScroll }) => {
+      if (!cancelled) stop = startSmoothScroll();
+    });
+    return () => {
+      cancelled = true;
+      stop?.();
+    };
+  }, []);
+
+  // Cada página nueva empieza arriba y recalcula sus ScrollTriggers.
+  useEffect(() => {
+    if (firstRender.current) {
+      firstRender.current = false;
+      return;
+    }
+    import("~/motion/gsap").then(({ resetScroll }) => resetScroll());
+  }, [pathname]);
+}
+
 export default function App() {
+  useSmoothScroll();
   return (
     <>
       <Navbar />

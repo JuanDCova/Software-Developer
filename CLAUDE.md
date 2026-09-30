@@ -17,7 +17,10 @@ React Router en modo framework con `ssr: false` + `prerender` (ver `docs/adr/000
 - Cada proyecto dice qué hizo Juan David (`myRole`) y si una IA escribió parte del código (`aiAssisted`).
 - Colores solo desde los tokens (`bg-bg`, `text-ink`, `text-ink-soft`, `bg-accent`, `border-line`...). Un solo acento. Radios `rounded-control|component|card|visual`.
 - Motion: solo transform y opacity, siempre con `prefers-reduced-motion`. Sin preloader, sin cursor custom, sin scroll cues, sin `window.addEventListener("scroll")`.
-- No mezclar GSAP y Motion en el mismo componente (tanda 2).
+- GSAP, ScrollTrigger y Lenis solo vía `app/motion/` (`useMotion` hace el import dinámico y limpia al desmontar). No se usa la librería Motion.
+- Escena 3D en `app/components/three/`, cargada por `HeroBackdrop` solo en escritorio.
+- Fuentes en `app/styles/fonts.css` (ver `docs/adr/0003-fuentes-y-rendimiento.md`).
+- Commits sin líneas Co-Authored-By.
 
 ## Skills del proyecto
 

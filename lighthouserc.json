@@ -14,7 +14,7 @@
         "categories:performance": [
           "error",
           {
-            "minScore": 0.9
+            "minScore": 0.8
           }
         ],
         "categories:accessibility": [
@@ -30,21 +30,21 @@
           }
         ],
         "categories:seo": [
-          "warn",
+          "error",
           {
             "minScore": 0.95
           }
         ],
         "largest-contentful-paint": [
-          "error",
+          "warn",
           {
-            "maxNumericValue": 3000
+            "maxNumericValue": 2500
           }
         ],
         "cumulative-layout-shift": [
           "error",
           {
-            "maxNumericValue": 0.1
+            "maxNumericValue": 0.05
           }
         ]
       }

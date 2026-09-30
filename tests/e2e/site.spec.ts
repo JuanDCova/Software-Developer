@@ -1,7 +1,7 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 
-const pages = ["/", "/proyectos", "/proyectos/sgtal", "/proyectos/erp-unicorsalud", "/cv"];
+const pages = ["/", "/proyectos", "/proyectos/sgtal", "/proyectos/erp-educacion-superior", "/cv"];
 
 test.describe("home", () => {
   test("el hero dice quién es y qué hace, con los dos CTAs", async ({ page }) => {
@@ -107,4 +107,59 @@ test("no hay errores de consola ni de hidratación", async ({ page }) => {
     await page.waitForLoadState("networkidle");
   }
   expect(errors).toEqual([]);
+});
+
+test.describe("contenido real", () => {
+  test("foto, correo y LinkedIn están publicados", async ({ page }) => {
+    await page.goto("/");
+    const photo = page.getByRole("img", { name: /Juan David Cova/ });
+    await expect(photo).toBeVisible();
+    expect(await photo.evaluate((img: HTMLImageElement) => img.naturalWidth)).toBeGreaterThan(0);
+    await expect(page.getByRole("link", { name: "juancoava0@gmail.com" })).toHaveAttribute(
+      "href",
+      "mailto:juancoava0@gmail.com",
+    );
+    await expect(page.getByRole("link", { name: /LinkedIn/ })).toHaveAttribute(
+      "href",
+      "https://www.linkedin.com/in/juancovasoftwaredeveloper/",
+    );
+    await expect(page.getByText("por confirmar")).toHaveCount(0);
+  });
+
+  test("el CV trae formación e idiomas", async ({ page }) => {
+    await page.goto("/cv");
+    await expect(page.getByText("Ingeniería de Sistemas", { exact: true })).toBeVisible();
+    await expect(page.getByText(/Inglés técnico/)).toBeVisible();
+  });
+});
+
+test.describe("interacción de escritorio", () => {
+  test.skip(({ isMobile }) => isMobile, "Solo en escritorio");
+
+  test("la red de tecnologías muestra dónde se usó cada una", async ({ page }) => {
+    await page.goto("/#stack");
+    await page.getByRole("button", { name: "PostgreSQL", exact: true }).hover();
+    await expect(page.getByText(/^PostgreSQL: .*SGTAL/)).toBeVisible();
+  });
+
+  test("el showcase de proyectos se fija y avanza en horizontal", async ({ page }) => {
+    await page.goto("/");
+    await expect(page.locator("#proyectos")).toHaveClass(/is-horizontal/);
+    const track = page.locator(".showcase-track");
+    const before = await track.evaluate((el) => el.getBoundingClientRect().x);
+    const top = await page.evaluate(
+      () => document.getElementById("proyectos")!.getBoundingClientRect().top + window.scrollY,
+    );
+    await page.evaluate((y) => window.scrollTo(0, y + 900), top);
+    await expect
+      .poll(() => track.evaluate((el) => el.getBoundingClientRect().x))
+      .toBeLessThan(before - 300);
+  });
+
+  test("con reduced motion los proyectos se leen apilados", async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await page.goto("/");
+    await page.waitForTimeout(500);
+    await expect(page.locator("#proyectos")).not.toHaveClass(/is-horizontal/);
+  });
 });

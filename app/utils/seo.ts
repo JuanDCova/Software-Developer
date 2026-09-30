@@ -44,9 +44,7 @@ export function pageMeta({ title, description, path }: PageMeta): MetaDescriptor
 }
 
 export function personJsonLd() {
-  const sameAs = [profile.links.github, profile.links.linkedin].filter((link): link is string =>
-    Boolean(link),
-  );
+  const sameAs = [profile.links.github, profile.links.linkedin];
   return {
     "@context": "https://schema.org",
     "@type": "Person",

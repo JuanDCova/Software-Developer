@@ -48,7 +48,7 @@ Salen de los repositorios locales de Juan David. Detalle en `app/data/projects.t
 
 | Proyecto              | Destacado | Autoría                                                                |
 | --------------------- | --------- | ---------------------------------------------------------------------- |
-| ERP UC (Unicorsalud)  | Sí        | Equipo de 4; módulo académico, estudiantes, PDF, seguridad de sesiones |
+| ERP Universitario     | Sí        | Equipo de 4; módulo académico, estudiantes, PDF, seguridad de sesiones |
 | SGTAL                 | Sí        | Autor único                                                            |
 | Nexora Platform       | Sí        | Propio, con partes hechas por Claude Code                              |
 | Palatsi Beauty OS     | No        | Mayormente generado por Claude Code; se muestra como dirección técnica |
@@ -65,17 +65,15 @@ Salen de los repositorios locales de Juan David. Detalle en `app/data/projects.t
 
 ## Roadmap
 
-| Tanda     | Alcance                                                                                                       |
-| --------- | ------------------------------------------------------------------------------------------------------------- |
-| 1 (hecha) | Spec v2, base técnica, design system, contenido, páginas, SEO, pruebas, CI                                    |
-| 2         | Motion: showcase horizontal con pin, títulos cinéticos, parallax, timeline de experiencia, red de tecnologías |
-| 3         | 3D del hero con R3F en diferido y póster de respaldo; diagramas de arquitectura interactivos                  |
-| 4         | Foto tratada, capturas con datos demo, clips con HyperFrames, dominio y analítica                             |
+| Tanda | Estado  | Alcance                                                                                                                                                                                         |
+| ----- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1     | Hecha   | Spec v2, base técnica, design system, contenido, páginas, SEO, pruebas, CI                                                                                                                      |
+| 2     | Hecha   | Titular cinético, foto con máscara y parallax, línea de tiempo que se llena con el scroll, red de tecnologías interactiva, showcase horizontal fijado, scroll suave con Lenis (solo escritorio) |
+| 3     | Hecha   | Red 3D del hero con React Three Fiber, cargada en diferido y solo en escritorio; diagramas de arquitectura con resaltado por capa                                                               |
+| 4     | Parcial | Hecho: foto, OG con foto, contacto real, formación. Falta: capturas con datos demo, métricas, dominio y analítica                                                                               |
 
 ## Definition of Done (ajustada)
 
-Responsive completo, modo claro y oscuro, prerender con Open Graph por ruta, accesibilidad sin violaciones serias de axe, Lighthouse móvil de 95 o más en rendimiento, accesibilidad y buenas prácticas, LCP menor a 2.5 s, CLS menor a 0.1, contenido verificado (ver `docs/CONTENIDO_PENDIENTE.md`), y todo el checklist de la sección 14 de `design-taste-frontend`.
+Responsive completo, modo claro y oscuro, prerender con Open Graph por ruta, accesibilidad sin violaciones serias de axe, CLS menor a 0.05, contenido verificado (ver `docs/CONTENIDO_PENDIENTE.md`), y todo el checklist de la sección 14 de `design-taste-frontend`.
 
-### Estado de rendimiento (tanda 1)
-
-Lighthouse móvil simulado (4G lento): accesibilidad y buenas prácticas en 100, CLS menor a 0.05, pero rendimiento entre 0.92 y 0.93 con LCP cerca de 2.6 s. La causa medida son las fuentes web: sin ellas el LCP baja a 2.2 s. Ya se cambió JetBrains Mono por Geist Mono (17 KB menos). El gate de CI queda temporalmente en rendimiento de 0.90 y LCP de 3 s para no bloquear; la meta sigue siendo 0.95 y 2.5 s. Opciones para la tanda 2: subconjunto de glifos propio para Space Grotesk y Geist, y medir en el deploy real de Vercel (HTTP/2, brotli, CDN). SEO sale en 0.66 solo por el `noindex` intencional.
+Rendimiento: ver `docs/adr/0003-fuentes-y-rendimiento.md`. La meta sigue siendo 0.95 en Lighthouse móvil; hoy la medición local da entre 0.83 y 0.92.
