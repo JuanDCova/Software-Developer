@@ -2,7 +2,7 @@ import { ArrowUpRight } from "@phosphor-icons/react";
 import { Link } from "react-router";
 
 import { ArchitectureDiagram } from "~/components/architecture/architecture-diagram";
-import { Tag } from "~/components/common/tag";
+import { TagList } from "~/components/common/tag";
 import { statusLabels } from "~/data/projects";
 import type { Project } from "~/data/types";
 
@@ -61,13 +61,9 @@ export function ProjectCard({
         </Heading>
         <p className="mt-2 leading-relaxed text-ink-soft">{project.description}</p>
 
-        <ul className="mt-6 flex flex-wrap gap-2" aria-label="Tecnologías principales">
-          {visibleTech.map((technology) => (
-            <li key={technology}>
-              <Tag>{technology}</Tag>
-            </li>
-          ))}
-        </ul>
+        <div className="mt-6">
+          <TagList items={visibleTech} label="Tecnologías principales" />
+        </div>
 
         <p className="mt-auto inline-flex items-center gap-1.5 pt-8 text-sm font-semibold text-accent-ink">
           Ver proyecto

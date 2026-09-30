@@ -1,4 +1,5 @@
 import { useMemo, useRef, useState } from "react";
+import { Link } from "react-router";
 
 import { projectsUsing, skills } from "~/data/skills";
 import { useMotion } from "~/motion/use-motion";
@@ -71,7 +72,8 @@ export function TechnologyNetwork() {
     techNodes.find((node) => node.id === id) ?? projectNodes.find((node) => node.id === id);
 
   const caption = (() => {
-    if (!active || !connected) return "Pasa el cursor o navega con el teclado por la red.";
+    if (!active || !connected)
+      return "Pasa el cursor por una tecnología para ver dónde la usé. Los proyectos abren su caso.";
     if (active.kind === "tech") {
       const names = projectNodes.filter((p) => connected.projects.has(p.id)).map((p) => p.label);
       return `${active.id}: ${names.join(", ")}.`;
@@ -161,50 +163,48 @@ export function TechnologyNetwork() {
 
         <div
           data-node
-          className="absolute -translate-x-1/2 -translate-y-1/2 rounded-component bg-brand px-4 py-2.5 font-display text-sm font-semibold text-bg shadow-lg dark:bg-accent dark:text-on-accent"
+          className="absolute -translate-x-1/2 -translate-y-1/2 bg-bg px-2 py-1 display-heading text-xl whitespace-nowrap text-accent-display"
           style={{ left: "50%", top: "50%" }}
         >
           Juan David
         </div>
 
         {projectNodes.map((node) => (
-          <button
+          <Link
             key={node.id}
-            type="button"
+            to={`/proyectos/${node.id}`}
             onMouseEnter={() => setActive({ kind: "project", id: node.id })}
             onFocus={() => setActive({ kind: "project", id: node.id })}
             onBlur={() => setActive(null)}
-            className={`absolute -translate-x-1/2 -translate-y-1/2 rounded-component border px-3 py-2 font-display text-sm font-semibold whitespace-nowrap transition-[opacity,border-color,background-color] duration-300 ${
+            className={`absolute -translate-x-1/2 -translate-y-1/2 px-3.5 py-2 font-display text-sm font-bold tracking-[0.04em] whitespace-nowrap uppercase transition-[opacity,background-color,color] duration-300 chamfer ${
               active?.kind === "project" && active.id === node.id
-                ? "border-accent bg-accent text-on-accent"
-                : "border-line-strong bg-surface text-brand"
+                ? "bg-accent text-on-accent"
+                : "bg-brand text-bg"
             } ${isDim("project", node.id) ? "opacity-35" : "opacity-100"}`}
             style={{ left: pct(node.x, WIDTH), top: pct(node.y, HEIGHT) }}
           >
             <span data-node className="block">
               {node.label}
             </span>
-          </button>
+          </Link>
         ))}
 
         {techNodes.map((node) => (
-          <button
+          // Las tecnologías no navegan: son texto que resalta sus conexiones al pasar el cursor.
+          <span
             key={node.id}
-            type="button"
             onMouseEnter={() => setActive({ kind: "tech", id: node.id })}
-            onFocus={() => setActive({ kind: "tech", id: node.id })}
-            onBlur={() => setActive(null)}
-            className={`absolute -translate-x-1/2 -translate-y-1/2 rounded-control border px-2.5 py-1 font-mono text-xs whitespace-nowrap transition-[opacity,border-color,color] duration-300 ${
+            className={`absolute -translate-x-1/2 -translate-y-1/2 bg-bg px-1.5 py-0.5 font-mono text-xs whitespace-nowrap transition-[opacity,color] duration-300 ${
               active?.kind === "tech" && active.id === node.id
-                ? "border-accent bg-accent-soft text-accent-ink"
-                : "border-line bg-bg text-ink"
+                ? "font-semibold text-accent-ink"
+                : "text-ink"
             } ${isDim("tech", node.id) ? "opacity-35" : "opacity-100"}`}
             style={{ left: pct(node.x, WIDTH), top: pct(node.y, HEIGHT) }}
           >
             <span data-node className="block">
               {node.label}
             </span>
-          </button>
+          </span>
         ))}
       </div>
       <p aria-live="polite" className="mt-6 min-h-6 text-center text-sm text-ink-soft">

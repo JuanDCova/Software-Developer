@@ -7,7 +7,7 @@ test.describe("home", () => {
   test("el hero dice quién es y qué hace, con los dos CTAs", async ({ page }) => {
     await page.goto("/");
     await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-      "Construyo sistemas que organizan tu empresa",
+      "Construyo, mantengo y escalo software para tu empresa",
     );
     await expect(page.getByRole("link", { name: "Ver proyectos" }).first()).toBeVisible();
     await expect(page.getByRole("link", { name: "Ver CV" }).first()).toBeVisible();
@@ -20,7 +20,7 @@ test.describe("home", () => {
       "Experiencia laboral",
       "Stack tecnológico",
       "Proyectos destacados",
-      "Hablemos de tu equipo",
+      "Hablemos de tu reto",
     ]) {
       await expect(page.getByRole("region", { name, exact: true })).toBeAttached();
     }
@@ -144,7 +144,7 @@ test.describe("interacción de escritorio", () => {
 
   test("la red de tecnologías muestra dónde se usó cada una", async ({ page }) => {
     await page.goto("/#stack");
-    await page.getByRole("button", { name: "PostgreSQL", exact: true }).hover();
+    await page.locator("#stack").getByText("PostgreSQL", { exact: true }).first().hover();
     await expect(page.getByText(/^PostgreSQL: .*SGTAL/)).toBeVisible();
   });
 

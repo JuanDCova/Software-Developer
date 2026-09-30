@@ -94,19 +94,28 @@ export default function Cv() {
             <ul className="mt-4 space-y-3 text-sm">
               <li className="flex items-center gap-3">
                 <EnvelopeSimple size={18} aria-hidden="true" className="shrink-0 text-accent" />
-                <a href={`mailto:${profile.links.email}`} className="break-all hover:underline">
+                <a
+                  href={`mailto:${profile.links.email}`}
+                  className="break-all underline decoration-accent underline-offset-4"
+                >
                   {profile.links.email}
                 </a>
               </li>
               <li className="flex items-center gap-3">
                 <LinkedinLogo size={18} aria-hidden="true" className="shrink-0 text-accent" />
-                <a href={profile.links.linkedin} className="break-all hover:underline">
+                <a
+                  href={profile.links.linkedin}
+                  className="break-all underline decoration-accent underline-offset-4"
+                >
                   linkedin.com/in/juancovasoftwaredeveloper
                 </a>
               </li>
               <li className="flex items-center gap-3">
                 <GithubLogo size={18} aria-hidden="true" className="shrink-0 text-accent" />
-                <a href={profile.links.github} className="hover:underline">
+                <a
+                  href={profile.links.github}
+                  className="underline decoration-accent underline-offset-4"
+                >
                   github.com/JuanDCova
                 </a>
               </li>
@@ -233,13 +242,16 @@ export default function Cv() {
             </MainHeading>
             <ol className="mt-6 grid gap-x-6 gap-y-5 sm:grid-cols-2">
               {timeline.map((milestone) => (
-                <li key={milestone.title} className="bg-surface-2 p-4 chamfer">
+                <li key={milestone.title} className="border-l-2 border-accent pl-4">
                   <p className="font-mono text-xs font-semibold text-accent-ink uppercase">
                     {milestone.date}
                   </p>
                   <p className="mt-1 font-semibold text-ink">
                     {milestone.slug ? (
-                      <Link to={`/proyectos/${milestone.slug}`} className="hover:underline">
+                      <Link
+                        to={`/proyectos/${milestone.slug}`}
+                        className="text-accent-ink underline decoration-accent/50 underline-offset-4 hover:decoration-current"
+                      >
                         {milestone.title}
                       </Link>
                     ) : (
@@ -260,7 +272,10 @@ export default function Cv() {
               {projects.map((project) => (
                 <li key={project.slug} className="break-inside-avoid py-3.5">
                   <p className="font-semibold text-ink">
-                    <Link to={`/proyectos/${project.slug}`} className="hover:underline">
+                    <Link
+                      to={`/proyectos/${project.slug}`}
+                      className="text-accent-ink underline decoration-accent/50 underline-offset-4 hover:decoration-current"
+                    >
                       {project.title}
                     </Link>
                     <span className="font-normal text-ink-soft">, {project.subtitle}</span>

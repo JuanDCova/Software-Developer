@@ -21,7 +21,7 @@ const box: Record<Variant, string> = {
 
 /**
  * Diagrama de capas en HTML semántico: se lee con lector de pantalla y se
- * imprime bien. Al pasar el cursor o enfocar una capa, se resalta.
+ * imprime bien. Las piezas van como texto: nada aquí es clicable.
  */
 export function ArchitectureDiagram({ architecture, variant = "full" }: ArchitectureDiagramProps) {
   return (
@@ -31,29 +31,18 @@ export function ArchitectureDiagram({ architecture, variant = "full" }: Architec
     >
       {architecture.layers.map((layer, index) => (
         <li key={layer.name}>
-          <div
-            className={`group/layer rounded-component border border-line bg-surface transition-[border-color,transform] duration-300 hover:-translate-y-px hover:border-accent ${box[variant]}`}
-          >
+          <div className={`rounded-component border-l-2 border-accent bg-surface ${box[variant]}`}>
             <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
               <p className="font-display font-semibold text-brand">{layer.name}</p>
               <p className="font-mono text-xs text-ink-soft">{layer.tech}</p>
             </div>
             {variant === "compact" ? null : (
-              <ul
-                className={`flex flex-wrap ${variant === "full" ? "mt-3 gap-2" : "mt-2 gap-1.5"}`}
-                aria-label={`Piezas de ${layer.name}`}
+              <p
+                className={`leading-relaxed text-ink-soft ${variant === "full" ? "mt-3 text-sm" : "mt-1.5 text-[13px]"}`}
               >
-                {layer.nodes.map((node) => (
-                  <li
-                    key={node}
-                    className={`rounded-control bg-surface-2 font-mono text-ink transition-colors group-hover/layer:bg-accent-soft ${
-                      variant === "full" ? "px-2.5 py-1 text-xs" : "px-2 py-0.5 text-[11px]"
-                    }`}
-                  >
-                    {node}
-                  </li>
-                ))}
-              </ul>
+                <span className="sr-only">Piezas: </span>
+                {layer.nodes.join(", ")}
+              </p>
             )}
           </div>
           {index < architecture.layers.length - 1 ? (

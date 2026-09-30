@@ -2,7 +2,7 @@ import { useRef } from "react";
 
 import { Pending } from "~/components/common/pending";
 import { Section } from "~/components/common/section";
-import { Tag } from "~/components/common/tag";
+import { TagList } from "~/components/common/tag";
 import { experience } from "~/data/experience";
 import { useMotion } from "~/motion/use-motion";
 
@@ -45,18 +45,14 @@ export function Experience() {
               <h3 className="mt-3 display-heading text-[clamp(22px,2.6vw,30px)] text-brand">
                 {entry.organization}
               </h3>
-              <div className="mt-2 font-display font-bold tracking-[0.06em] text-accent-ink uppercase">
+              <div className="mt-2 font-display font-bold tracking-[0.06em] text-ink uppercase">
                 {entry.role ?? <Pending label="Cargo" />}
               </div>
               <p className="mt-4 max-w-[65ch] leading-relaxed text-ink">{entry.summary}</p>
               {entry.technologies.length > 0 ? (
-                <ul className="mt-4 flex flex-wrap gap-2" aria-label="Tecnologías">
-                  {entry.technologies.map((technology) => (
-                    <li key={technology}>
-                      <Tag>{technology}</Tag>
-                    </li>
-                  ))}
-                </ul>
+                <div className="mt-4">
+                  <TagList items={entry.technologies} label="Tecnologías" />
+                </div>
               ) : null}
             </li>
           ))}

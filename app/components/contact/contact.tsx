@@ -70,10 +70,10 @@ export function Contact() {
       <div className="reveal relative overflow-hidden bg-brand px-6 py-14 text-bg chamfer-xl sm:px-12 md:py-20 dark:bg-surface dark:text-ink">
         <h2 id="contacto-titulo" className="display-heading text-[clamp(40px,7vw,88px)]">
           <span className="block">Hablemos</span>{" "}
-          <span className="block pl-[min(160px,18vw)] text-accent">de tu equipo</span>
+          <span className="block pl-[min(160px,18vw)] text-accent">de tu reto</span>
         </h2>
         <p className="mt-6 max-w-[48ch] text-lg leading-relaxed opacity-80">
-          Si tu equipo construye sistemas de gestión con Django y React, me interesa conversar.
+          Crear algo desde cero, mantener lo que ya existe o reforzar tu equipo: cuéntame el reto.
         </p>
 
         <div className="mt-12 flex items-center gap-3">

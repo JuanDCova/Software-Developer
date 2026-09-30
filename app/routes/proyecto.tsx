@@ -4,7 +4,7 @@ import { Link } from "react-router";
 
 import type { Route } from "./+types/proyecto";
 import { ArchitectureDiagram } from "~/components/architecture/architecture-diagram";
-import { Tag } from "~/components/common/tag";
+import { TagList } from "~/components/common/tag";
 import { getProjectBySlug, projects, statusLabels } from "~/data/projects";
 import { NotFound } from "~/routes/404";
 import { pageMeta } from "~/utils/seo";
@@ -132,19 +132,13 @@ export default function Proyecto({ params }: Route.ComponentProps) {
         ) : null}
 
         <Block id="tecnologia" title="Tecnología">
-          <ul className="flex flex-wrap gap-2">
-            {project.technologies.map((technology) => (
-              <li key={technology}>
-                <Tag>{technology}</Tag>
-              </li>
-            ))}
-          </ul>
+          <TagList items={project.technologies} label="Tecnologías" />
         </Block>
 
         <Block id="funcionalidades" title="Funcionalidades">
           <ul className="grid gap-4 sm:grid-cols-2">
             {project.features.map((feature) => (
-              <li key={feature} className="bg-surface p-5 leading-relaxed chamfer">
+              <li key={feature} className="border-l-2 border-accent pl-4 leading-relaxed">
                 {feature}
               </li>
             ))}

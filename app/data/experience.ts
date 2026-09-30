@@ -38,4 +38,13 @@ export const experience: ExperienceEntry[] = [
       "Soporte corporativo y gestión tecnológica para Constructora Bolívar: atención de incidencias, configuración de equipos y sistemas operativos, y soporte a usuarios.",
     technologies: [],
   },
+  {
+    id: "sennova",
+    role: "Desarrollador de Software",
+    organization: "SENNOVA, SENA",
+    period: "2023 - 2024",
+    summary:
+      "Desarrollo de software en SENNOVA, el Sistema de Investigación, Desarrollo Tecnológico e Innovación del Servicio Nacional de Aprendizaje (SENA).",
+    technologies: [],
+  },
 ];

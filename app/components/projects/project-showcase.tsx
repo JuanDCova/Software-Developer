@@ -5,7 +5,7 @@ import { Link } from "react-router";
 import { ArchitectureDiagram } from "~/components/architecture/architecture-diagram";
 import { ButtonLink } from "~/components/common/button-link";
 import { StairHeading } from "~/components/common/section";
-import { Tag } from "~/components/common/tag";
+import { TagList } from "~/components/common/tag";
 import { getFeaturedProjects, projects, statusLabels } from "~/data/projects";
 import type { Project } from "~/data/types";
 import { useMotion } from "~/motion/use-motion";
@@ -37,13 +37,9 @@ function Panel({ project, tone }: { project: Project; tone: string }) {
           {project.myRole[0]}
         </p>
 
-        <ul className="mt-6 flex flex-wrap gap-2" aria-label="Tecnologías principales">
-          {project.technologies.slice(0, 6).map((technology) => (
-            <li key={technology}>
-              <Tag>{technology}</Tag>
-            </li>
-          ))}
-        </ul>
+        <div className="mt-6">
+          <TagList items={project.technologies.slice(0, 6)} label="Tecnologías principales" />
+        </div>
 
         <div className="mt-auto flex flex-wrap items-center gap-x-6 gap-y-2 pt-8 text-sm">
           <span className="inline-flex items-center gap-1.5 font-semibold text-accent-ink">

@@ -3,7 +3,7 @@ export const site = {
   role: "Desarrollador full stack",
   title: "Juan David Cova | Desarrollador full stack",
   description:
-    "Desarrollador full stack. Construyo ERP, LMS y plataformas de logística con Django, React y PostgreSQL.",
+    "Juan David Cova, desarrollador full stack desde 2023: frontend, backend, mantenimiento, refactorización y software desde cero.",
   url: (import.meta.env.VITE_SITE_URL ?? "http://localhost:4173").replace(/\/$/, ""),
   locale: "es_CO",
   ogImage: "/og.png",

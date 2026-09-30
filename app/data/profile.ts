@@ -10,15 +10,15 @@ export const profile = {
   fullName: "Juan David Cova Salgado",
   /** Titular escalonado del hero: tres líneas a la izquierda y tres desplazadas. */
   heroLines: [
-    ["Construyo", "sistemas", "que"],
-    ["organizan", "tu", "empresa"],
+    ["Construyo,", "mantengo", "y escalo"],
+    ["software", "para tu", "empresa"],
   ] as const,
-  headline: "Desarrollador full stack de sistemas de gestión",
+  headline: "Desarrollador full stack",
   intro:
-    "Construyo ERP, LMS y plataformas de logística con Django, React y PostgreSQL, desde el modelo de datos hasta el despliegue.",
+    "Desarrollador full stack desde 2023. Frontend, backend, mantenimiento, refactorización e implementación: listo para el próximo reto.",
   about: [
-    "Soy desarrollador de software en la Corporación Unicorsalud y estudiante de octavo semestre de Ingeniería de Sistemas. Trabajo sobre todo con Django REST Framework en el backend y React con TypeScript en el frontend.",
-    "Me interesan los sistemas donde las reglas del negocio importan: flujos de aprobación, inventarios que no pueden descuadrarse, permisos por rol. Participo en un ERP para instituciones de educación superior y he construido por mi cuenta plataformas de logística y de formación virtual.",
+    "Desarrollo software desde 2023: empecé en SENNOVA, el sistema de investigación e innovación del SENA, y hoy soy desarrollador en la Corporación Unicorsalud mientras curso octavo semestre de Ingeniería de Sistemas.",
+    "Me adapto a lo que el proyecto necesite: crear un sistema desde cero, mantener y refactorizar uno existente, implementarlo o sumarme al frontend o al backend. Trabajo sobre todo con Django, React y TypeScript, y aprendo rápido lo que haga falta para el siguiente desafío.",
   ],
   /** Cómo trabajo con IA. Se dice de frente porque el historial de git lo muestra. */
   aiStatement:
@@ -39,10 +39,11 @@ export const profile = {
   ],
   /** Perfil de la hoja de vida, tal como la presenta Juan David. */
   cvSummary:
-    "Desarrollador de software y estudiante de octavo semestre de Ingeniería de Sistemas, con habilidades en desarrollo web full stack y gestión de bases de datos. Experiencia en soporte técnico y mantenimiento de equipos, incluyendo configuración de sistemas operativos y resolución de incidencias. Me adapto rápido a nuevas tecnologías y me enfoco en entregar soluciones eficientes, estables y bien documentadas.",
+    "Desarrollador de software desde 2023 y estudiante de octavo semestre de Ingeniería de Sistemas. Experiencia en desarrollo full stack, gestión de bases de datos, mantenimiento y refactorización de sistemas existentes, y creación de productos desde cero. También cuento con experiencia en soporte técnico y resolución de incidencias. Me adapto rápido a nuevas tecnologías y busco nuevos desafíos donde entregar soluciones estables y bien documentadas.",
   /** Competencias de la hoja de vida (además del stack técnico). */
   competencies: [
     "Desarrollo web full stack",
+    "Mantenimiento y refactorización",
     "Gestión de bases de datos",
     "Análisis de requerimientos",
     "Documentación técnica",

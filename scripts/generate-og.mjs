@@ -33,9 +33,9 @@ h1 span { display: block; }
 <img class="photo" src="data:image/webp;base64,${photo}">
 <div class="text">
   <p class="name">Juan David Cova</p>
-  <h1><span>Construyo</span><span>sistemas</span><span>que</span><span class="in">organizan</span><span class="in">tu</span><span class="in cyan">empresa</span></h1>
+  <h1><span>Construyo,</span><span>mantengo</span><span>y escalo</span><span class="in">software</span><span class="in">para tu</span><span class="in cyan">empresa</span></h1>
 </div>
-<p class="cta">Desarrollador full stack</p>
+<p class="cta">Desarrollador full stack desde 2023</p>
 </body></html>`;
 
 const browser = await chromium.launch();

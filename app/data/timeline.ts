@@ -12,6 +12,11 @@ export interface Milestone {
  */
 export const timeline: Milestone[] = [
   {
+    date: "2023 - 2024",
+    title: "Desarrollador de Software en SENNOVA",
+    detail: "Sistema de Investigación, Desarrollo Tecnológico e Innovación del SENA.",
+  },
+  {
     date: "2025",
     title: "Soporte Tecnológico en COEM",
     detail: "Soporte corporativo para Constructora Bolívar: incidencias, equipos y usuarios.",
