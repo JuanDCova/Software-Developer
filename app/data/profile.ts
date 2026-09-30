@@ -15,9 +15,9 @@ export const profile = {
   ] as const,
   headline: "Desarrollador full stack",
   intro:
-    "Desarrollador full stack desde 2023. Frontend, backend, mantenimiento, refactorización e implementación: listo para el próximo reto.",
+    "Desarrollador full stack. Frontend, backend, mantenimiento, refactorización e implementación: listo para el próximo reto.",
   about: [
-    "Desarrollo software desde 2023: empecé en SENNOVA, el sistema de investigación e innovación del SENA, y hoy soy desarrollador en la Corporación Unicorsalud mientras curso octavo semestre de Ingeniería de Sistemas.",
+    "Desarrollo software: empecé en SENNOVA, el sistema de investigación e innovación del SENA, y hoy soy desarrollador en la Corporación Unicorsalud mientras curso octavo semestre de Ingeniería de Sistemas.",
     "Me adapto a lo que el proyecto necesite: crear un sistema desde cero, mantener y refactorizar uno existente, implementarlo o sumarme al frontend o al backend. Trabajo sobre todo con Django, React y TypeScript, y aprendo rápido lo que haga falta para el siguiente desafío.",
   ],
   /** Cómo trabajo con IA. Se dice de frente porque el historial de git lo muestra. */

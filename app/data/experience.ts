@@ -4,7 +4,7 @@ import type { ExperienceEntry } from "./types";
 export const experience: ExperienceEntry[] = [
   {
     id: "unicorsalud",
-    role: "Desarrollador de Software Junior",
+    role: "Desarrollador de Software ",
     organization: "Corporación Unicorsalud",
     period: "2026 - Actualidad",
     summary:
