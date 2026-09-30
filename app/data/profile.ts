@@ -1,11 +1,18 @@
 export interface Education {
   institution: string;
   program: string;
-  status: string;
+  /** Solo si se conoce con certeza. */
+  status?: string;
 }
 
 export const profile = {
   name: "Juan David Cova",
+  fullName: "Juan David Cova Salgado",
+  /** Titular escalonado del hero: tres líneas a la izquierda y tres desplazadas. */
+  heroLines: [
+    ["Construyo", "sistemas", "que"],
+    ["organizan", "tu", "empresa"],
+  ] as const,
   headline: "Desarrollador full stack de sistemas de gestión",
   intro:
     "Construyo ERP, LMS y plataformas de logística con Django, React y PostgreSQL, desde el modelo de datos hasta el despliegue.",
@@ -30,6 +37,20 @@ export const profile = {
       body: "Desactivación, auditoría y movimientos inmutables en lugar de eliminar registros.",
     },
   ],
+  /** Perfil de la hoja de vida, tal como la presenta Juan David. */
+  cvSummary:
+    "Desarrollador de software y estudiante de octavo semestre de Ingeniería de Sistemas, con habilidades en desarrollo web full stack y gestión de bases de datos. Experiencia en soporte técnico y mantenimiento de equipos, incluyendo configuración de sistemas operativos y resolución de incidencias. Me adapto rápido a nuevas tecnologías y me enfoco en entregar soluciones eficientes, estables y bien documentadas.",
+  /** Competencias de la hoja de vida (además del stack técnico). */
+  competencies: [
+    "Desarrollo web full stack",
+    "Gestión de bases de datos",
+    "Análisis de requerimientos",
+    "Documentación técnica",
+    "Soporte técnico",
+    "Mantenimiento de equipos",
+    "Resolución de incidencias",
+    "Trabajo en equipo",
+  ],
   process: ["Descubrir", "Diseñar", "Modelar", "Desarrollar", "Probar", "Desplegar"],
   location: "Colombia",
   education: [
@@ -41,7 +62,6 @@ export const profile = {
     {
       institution: "SENA, Centro Industrial y de Aviación",
       program: "Tecnólogo en Análisis y Desarrollo de Sistemas de Información",
-      status: "Titulado",
     },
   ] satisfies Education[],
   languages: ["Español nativo", "Inglés técnico"],

@@ -1,6 +1,6 @@
 # ADR 0003: Fuentes, motion y rendimiento
 
-Estado: aceptado. Fecha: 2026-09-30.
+Estado: aceptado. Fecha: 2026-09-30. Space Grotesk se reemplazó por Quantico en el ADR 0004, con la misma estrategia (optional + preload).
 
 ## Contexto
 

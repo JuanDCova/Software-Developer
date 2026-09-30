@@ -11,7 +11,7 @@ type Tone = "accent" | "neutral" | "deep";
 const tones: Record<Tone, string> = {
   accent: "bg-accent-soft",
   neutral: "bg-surface-2",
-  deep: "bg-[#1e3a5f]/10 dark:bg-[#1e3a5f]/40",
+  deep: "bg-surface",
 };
 
 interface ProjectCardProps {
@@ -36,7 +36,7 @@ export function ProjectCard({
 
   return (
     <article
-      className={`group relative flex h-full flex-col overflow-hidden rounded-card border border-line ${tones[tone]} transition-[border-color,transform] duration-300 hover:-translate-y-0.5 hover:border-line-strong`}
+      className={`group relative flex h-full flex-col overflow-hidden chamfer-xl ${tones[tone]} transition-transform duration-300 hover:-translate-y-0.5`}
     >
       {project.architecture && project.image === null ? (
         <div className="p-4 pb-0 sm:p-6 sm:pb-0">
@@ -51,7 +51,7 @@ export function ProjectCard({
         <p className="font-mono text-xs text-ink-soft">
           {project.category}, {project.year}. {statusLabels[project.status]}
         </p>
-        <Heading className="mt-3 font-display text-2xl font-semibold tracking-tight text-brand">
+        <Heading className="mt-3 display-heading text-[28px] text-brand">
           <Link
             to={`/proyectos/${project.slug}`}
             className="after:absolute after:inset-0 focus-visible:outline-none after:focus-visible:rounded-card after:focus-visible:outline-2 after:focus-visible:outline-accent"

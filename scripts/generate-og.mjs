@@ -1,36 +1,41 @@
 // Genera public/og.png (1200x630) para las vistas previas de LinkedIn, WhatsApp y X.
-// Usa las mismas fuentes y colores del sitio. Uso: npm run og
+// Usa la misma identidad del sitio: fondo cálido, Quantico, cian y la red de nodos.
+// Uso: npm run og (requiere haber corrido npm run poster)
 import { readFileSync } from "node:fs";
 import { chromium } from "@playwright/test";
 
-const font = (pkg, file) =>
-  readFileSync(
-    new URL(`../node_modules/@fontsource-variable/${pkg}/files/${file}`, import.meta.url),
-  ).toString("base64");
-
-const display = font("space-grotesk", "space-grotesk-latin-wght-normal.woff2");
-const body = font("geist", "geist-latin-wght-normal.woff2");
-const photo = readFileSync(
-  new URL("../public/img/juan-david-cova-800.webp", import.meta.url),
-).toString("base64");
-const mono = font("geist-mono", "geist-mono-latin-wght-normal.woff2");
+const b64 = (path) => readFileSync(new URL(path, import.meta.url)).toString("base64");
+const quantico = b64("../node_modules/@fontsource/quantico/files/quantico-latin-700-normal.woff2");
+const geist = b64("../node_modules/@fontsource-variable/geist/files/geist-latin-wght-normal.woff2");
+const photo = b64("../public/img/juan-david-cova-800.webp");
+const network = b64("../public/img/red-nodos.svg");
 
 const html = `<!doctype html>
 <html><head><meta charset="utf-8"><style>
-@font-face { font-family: Display; src: url(data:font/woff2;base64,${display}) format("woff2"); font-weight: 300 700; }
-@font-face { font-family: Body; src: url(data:font/woff2;base64,${body}) format("woff2"); font-weight: 100 900; }
-@font-face { font-family: Mono; src: url(data:font/woff2;base64,${mono}) format("woff2"); font-weight: 100 800; }
+@font-face { font-family: Q; src: url(data:font/woff2;base64,${quantico}) format("woff2"); font-weight: 700; }
+@font-face { font-family: G; src: url(data:font/woff2;base64,${geist}) format("woff2"); font-weight: 100 900; }
 * { margin: 0; box-sizing: border-box; }
-body { width: 1200px; height: 630px; background: #020617; color: #f8fafc; font-family: Body; padding: 72px 80px; display: flex; flex-direction: column; justify-content: space-between; position: relative; }
-.photo { position: absolute; right: 64px; top: 64px; width: 402px; height: 502px; border-radius: 32px; object-fit: cover; }
-.name { font-family: Mono; font-size: 26px; color: #94a3b8; }
-h1 { font-family: Display; font-weight: 600; font-size: 68px; line-height: 1.04; letter-spacing: -0.02em; max-width: 12ch; margin-top: 28px; }
-.stack { font-family: Mono; font-size: 24px; color: #94a3b8; display: flex; gap: 28px; }
-.bar { width: 96px; height: 6px; background: #2563eb; border-radius: 3px; margin-bottom: 28px; }
+body { width: 1200px; height: 630px; background: #f2f1f0; color: #2b3033; font-family: G; position: relative; overflow: hidden; }
+.net { position: absolute; right: -240px; top: -60px; width: 1100px; opacity: .9; }
+.photo { position: absolute; right: 64px; top: 64px; width: 400px; height: 502px; object-fit: cover;
+  clip-path: polygon(0 0, calc(100% - 28px) 0, 100% 28px, 100% 100%, 28px 100%, 0 calc(100% - 28px)); }
+.text { position: absolute; left: 72px; top: 64px; }
+.name { font-family: Q; font-size: 20px; letter-spacing: .14em; color: #5d6164; text-transform: uppercase; }
+h1 { font-family: Q; font-size: 62px; line-height: .98; letter-spacing: .01em; text-transform: uppercase; margin-top: 26px; }
+h1 span { display: block; }
+.in { padding-left: 150px; }
+.cyan { color: #0e8fae; }
+.cta { position: absolute; left: 72px; bottom: 60px; font-family: Q; font-size: 17px; letter-spacing: .14em; text-transform: uppercase;
+  background: #15bcdf; color: #1a1c1e; padding: 16px 28px;
+  clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px)); }
 </style></head><body>
-<div><p class="name">Juan David Cova</p><h1>Desarrollador full stack de sistemas de gestión</h1></div>
+<img class="net" src="data:image/svg+xml;base64,${network}">
 <img class="photo" src="data:image/webp;base64,${photo}">
-<div><div class="bar"></div><div class="stack"><span>Django</span><span>React</span><span>TypeScript</span><span>PostgreSQL</span></div></div>
+<div class="text">
+  <p class="name">Juan David Cova</p>
+  <h1><span>Construyo</span><span>sistemas</span><span>que</span><span class="in">organizan</span><span class="in">tu</span><span class="in cyan">empresa</span></h1>
+</div>
+<p class="cta">Desarrollador full stack</p>
 </body></html>`;
 
 const browser = await chromium.launch();

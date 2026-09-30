@@ -17,7 +17,7 @@ import { NotFound } from "~/routes/404";
 import { personJsonLd } from "~/utils/seo";
 import { themeInitScript } from "~/utils/theme";
 
-import spaceGrotesk from "../node_modules/@fontsource-variable/space-grotesk/files/space-grotesk-latin-wght-normal.woff2?url";
+import quantico from "../node_modules/@fontsource/quantico/files/quantico-latin-700-normal.woff2?url";
 
 import "./styles/globals.css";
 
@@ -25,7 +25,7 @@ export const links: Route.LinksFunction = () => [
   { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
   { rel: "manifest", href: "/manifest.webmanifest" },
   // La fuente de titulares usa font-display: optional; con preload llega antes del primer pintado.
-  ...[spaceGrotesk].map((href) => ({
+  ...[quantico].map((href) => ({
     rel: "preload",
     href,
     as: "font",
@@ -40,8 +40,7 @@ export function Layout({ children }: { children: ReactNode }) {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#f8fafc" media="(prefers-color-scheme: light)" />
-        <meta name="theme-color" content="#020617" media="(prefers-color-scheme: dark)" />
+        <meta name="theme-color" content="#f2f1f0" />
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
         <Meta />
         <Links />

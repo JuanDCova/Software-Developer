@@ -2,58 +2,26 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { useEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
 
-/** Generador pseudoaleatorio con semilla: la red es siempre la misma. */
-function seeded(seed: number) {
-  let value = seed;
-  return () => {
-    value = (value * 1664525 + 1013904223) % 4294967296;
-    return value / 4294967296;
-  };
-}
+import { buildNetwork } from "./network-data";
 
-const NODE_COUNT = 140;
-const LINK_DISTANCE = 1.15;
-
-function buildNetwork() {
-  const random = seeded(7);
-  const points: THREE.Vector3[] = [];
-  for (let i = 0; i < NODE_COUNT; i++) {
-    // Volumen elipsoidal, más ancho que alto, como un sistema en capas.
-    const theta = random() * Math.PI * 2;
-    const phi = Math.acos(2 * random() - 1);
-    const radius = 2.2 + random() * 1.6;
-    points.push(
-      new THREE.Vector3(
-        radius * Math.sin(phi) * Math.cos(theta) * 1.5,
-        radius * Math.cos(phi) * 0.8,
-        radius * Math.sin(phi) * Math.sin(theta),
-      ),
-    );
-  }
-
-  const segments: number[] = [];
-  for (let i = 0; i < points.length; i++) {
-    for (let j = i + 1; j < points.length; j++) {
-      const a = points[i];
-      const b = points[j];
-      if (a && b && a.distanceTo(b) < LINK_DISTANCE) segments.push(a.x, a.y, a.z, b.x, b.y, b.z);
-    }
-  }
-
+function toBuffers() {
+  const { points, links } = buildNetwork();
   return {
-    nodes: new Float32Array(points.flatMap((p) => [p.x, p.y, p.z])),
-    links: new Float32Array(segments),
+    nodes: new Float32Array(points.flat()),
+    links: new Float32Array(
+      links.flatMap(([a, b]) => [...(points[a] ?? [0, 0, 0]), ...(points[b] ?? [0, 0, 0])]),
+    ),
   };
 }
 
 function readAccent() {
-  const value = getComputedStyle(document.documentElement).getPropertyValue("--accent-ink").trim();
+  const value = getComputedStyle(document.documentElement).getPropertyValue("--accent").trim();
   return new THREE.Color(value || "#2563eb");
 }
 
 function Network({ pointer }: { pointer: React.RefObject<{ x: number; y: number }> }) {
   const group = useRef<THREE.Group>(null);
-  const { nodes, links } = useMemo(() => buildNetwork(), []);
+  const { nodes, links } = useMemo(() => toBuffers(), []);
   const [color, setColor] = useState(readAccent);
 
   // El color sigue al tema: cambia con el toggle y con el sistema operativo.
@@ -88,13 +56,13 @@ function Network({ pointer }: { pointer: React.RefObject<{ x: number; y: number 
         <bufferGeometry>
           <bufferAttribute attach="attributes-position" args={[nodes, 3]} />
         </bufferGeometry>
-        <pointsMaterial color={color} size={0.055} sizeAttenuation transparent opacity={0.9} />
+        <pointsMaterial color={color} size={0.07} sizeAttenuation transparent opacity={0.9} />
       </points>
       <lineSegments>
         <bufferGeometry>
           <bufferAttribute attach="attributes-position" args={[links, 3]} />
         </bufferGeometry>
-        <lineBasicMaterial color={color} transparent opacity={0.22} />
+        <lineBasicMaterial color={color} transparent opacity={0.38} />
       </lineSegments>
     </group>
   );
@@ -139,7 +107,7 @@ export default function NeuralScene() {
       <Canvas
         dpr={[1, 1.5]}
         frameloop={visible ? "always" : "never"}
-        camera={{ position: [0, 0, 7.5], fov: 50 }}
+        camera={{ position: [0, 0, 6.2], fov: 50 }}
         gl={{ antialias: true, alpha: true, powerPreference: "low-power" }}
         onCreated={() => setReady(true)}
         aria-hidden="true"

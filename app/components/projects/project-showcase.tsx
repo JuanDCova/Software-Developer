@@ -4,23 +4,24 @@ import { Link } from "react-router";
 
 import { ArchitectureDiagram } from "~/components/architecture/architecture-diagram";
 import { ButtonLink } from "~/components/common/button-link";
+import { StairHeading } from "~/components/common/section";
 import { Tag } from "~/components/common/tag";
 import { getFeaturedProjects, projects, statusLabels } from "~/data/projects";
 import type { Project } from "~/data/types";
 import { useMotion } from "~/motion/use-motion";
 
-const tones = ["bg-accent-soft", "bg-surface-2", "bg-[#1e3a5f]/10 dark:bg-[#1e3a5f]/40"];
+const tones = ["bg-accent-soft", "bg-surface-2", "bg-surface"];
 
 function Panel({ project, tone }: { project: Project; tone: string }) {
   return (
     <article
-      className={`showcase-panel group relative grid gap-8 overflow-hidden rounded-card border border-line p-6 sm:p-8 lg:grid-cols-[1fr_1.05fr] lg:gap-10 ${tone}`}
+      className={`showcase-panel group relative grid gap-8 overflow-hidden p-6 chamfer-xl sm:p-8 lg:grid-cols-[1fr_1.05fr] lg:gap-10 ${tone}`}
     >
       <div className="flex flex-col">
         <p className="font-mono text-xs text-ink-soft">
           {project.category}, {project.year}. {statusLabels[project.status]}
         </p>
-        <h3 className="mt-4 font-display text-3xl font-semibold tracking-tight text-brand md:text-5xl">
+        <h3 className="mt-4 display-heading text-[clamp(30px,4vw,52px)] text-brand">
           <Link
             to={`/proyectos/${project.slug}`}
             className="after:absolute after:inset-0 focus-visible:outline-none after:focus-visible:rounded-card after:focus-visible:outline-2 after:focus-visible:outline-accent"
@@ -110,17 +111,12 @@ export function ProjectShowcase() {
       ref={sectionRef}
       id="proyectos"
       aria-labelledby="proyectos-titulo"
-      className="showcase py-20 md:py-32"
+      className="showcase py-[clamp(72px,10vw,140px)]"
     >
-      <div className="mx-auto w-full max-w-6xl px-4 sm:px-6">
-        <div className="reveal max-w-[65ch]">
-          <h2
-            id="proyectos-titulo"
-            className="font-display text-3xl font-semibold tracking-tight text-brand md:text-5xl"
-          >
-            Proyectos
-          </h2>
-          <p className="mt-4 text-lg leading-relaxed text-ink-soft">
+      <div className="mx-auto w-full max-w-[90rem] px-[clamp(20px,9vw,118px)]">
+        <div className="reveal">
+          <StairHeading id="proyectos-titulo" title="Proyectos" accent="destacados" />
+          <p className="showcase-lead mt-8 max-w-[520px] pl-[min(160px,18vw)] text-[clamp(15px,1.6vw,17px)] leading-[1.7] text-ink-soft">
             Casos reales con el problema, la arquitectura y lo que hice yo en cada uno.
           </p>
         </div>
@@ -134,8 +130,8 @@ export function ProjectShowcase() {
             </li>
           ))}
           <li className="showcase-item showcase-end">
-            <div className="flex h-full flex-col justify-center gap-6 rounded-card border border-dashed border-line-strong p-8 sm:p-10">
-              <p className="font-display text-2xl font-semibold text-brand md:text-3xl">
+            <div className="flex h-full flex-col justify-center gap-6 border-2 border-dashed border-line-strong p-8 sm:p-10">
+              <p className="display-heading text-[clamp(24px,2.6vw,34px)] text-brand">
                 {projects.length - featured.length} proyectos más, con el mismo nivel de detalle.
               </p>
               <div>

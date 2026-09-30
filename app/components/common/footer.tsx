@@ -5,7 +5,7 @@ import { profile } from "~/data/profile";
 export function Footer() {
   return (
     <footer className="border-t border-line print:hidden">
-      <div className="mx-auto flex w-full max-w-6xl flex-col gap-4 px-4 py-10 text-sm text-ink-soft sm:flex-row sm:items-center sm:justify-between sm:px-6">
+      <div className="mx-auto flex w-full max-w-[90rem] flex-col gap-4 px-[clamp(20px,9vw,118px)] py-10 text-sm text-ink-soft sm:flex-row sm:items-center sm:justify-between">
         <p>
           {profile.name}. Desarrollador full stack en {profile.location}.
         </p>

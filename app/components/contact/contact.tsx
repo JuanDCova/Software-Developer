@@ -29,7 +29,7 @@ const contactLinks: ContactLink[] = [
 ];
 
 const itemClass =
-  "flex min-h-16 items-center gap-4 rounded-component border border-current/20 px-5 py-4 transition-colors hover:bg-current/10";
+  "chamfer flex min-h-16 items-center gap-4 bg-current/[0.07] px-5 py-4 transition-colors hover:bg-current/15";
 
 /** Copia el correo al portapapeles con confirmación visible y anunciada. */
 function CopyEmail() {
@@ -49,7 +49,7 @@ function CopyEmail() {
     <button
       type="button"
       onClick={copy}
-      className="inline-flex size-12 shrink-0 items-center justify-center rounded-component border border-current/20 transition-colors hover:bg-current/10 active:scale-[0.96]"
+      className="inline-flex size-14 shrink-0 items-center justify-center bg-accent text-on-accent transition-colors chamfer hover:bg-accent-hover active:scale-[0.96]"
       aria-label={copied ? "Correo copiado" : "Copiar correo"}
     >
       {copied ? <Check size={20} aria-hidden="true" /> : <Copy size={20} aria-hidden="true" />}
@@ -65,14 +65,12 @@ export function Contact() {
     <section
       id="contacto"
       aria-labelledby="contacto-titulo"
-      className="mx-auto w-full max-w-6xl px-4 pb-24 sm:px-6 md:pb-32"
+      className="mx-auto w-full max-w-[90rem] px-[clamp(20px,9vw,118px)] pb-[clamp(72px,10vw,140px)]"
     >
-      <div className="reveal rounded-visual bg-brand px-6 py-14 text-bg sm:px-12 md:py-20 dark:bg-surface dark:text-ink">
-        <h2
-          id="contacto-titulo"
-          className="max-w-[18ch] font-display text-4xl font-semibold tracking-tight md:text-6xl"
-        >
-          Contacto
+      <div className="reveal relative overflow-hidden bg-brand px-6 py-14 text-bg chamfer-xl sm:px-12 md:py-20 dark:bg-surface dark:text-ink">
+        <h2 id="contacto-titulo" className="display-heading text-[clamp(40px,7vw,88px)]">
+          <span className="block">Hablemos</span>{" "}
+          <span className="block pl-[min(160px,18vw)] text-accent">de tu equipo</span>
         </h2>
         <p className="mt-6 max-w-[48ch] text-lg leading-relaxed opacity-80">
           Si tu equipo construye sistemas de gestión con Django y React, me interesa conversar.

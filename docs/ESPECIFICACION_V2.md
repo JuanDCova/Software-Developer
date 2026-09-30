@@ -21,7 +21,7 @@ Principio rector (sin cambios): primero experiencia y arquitectura, después efe
 | Preloader "LOADING EXPERIENCE 100%"                    | Se elimina. Entrada del hero de menos de 800 ms que no bloquea el texto                                                                                                                           | Daña el LCP y gasta los primeros segundos del reclutador                      |
 | Cursor contextual custom                               | Se elimina. Estados hover y focus claros                                                                                                                                                          | Patrón prohibido por la skill, mala accesibilidad                             |
 | "SCROLL ↓" en el hero                                  | Se elimina                                                                                                                                                                                        | Scroll cues prohibidos                                                        |
-| Inter para el cuerpo                                   | Space Grotesk (display) + Geist (cuerpo) + Geist Mono (técnico), autoalojadas                                                                                                                     | Inter desaconsejada por defecto                                               |
+| Inter para el cuerpo                                   | Quantico (display) + Geist (cuerpo) + Geist Mono (técnico), autoalojadas                                                                                                                          | Inter desaconsejada por defecto                                               |
 | Lucide React                                           | Phosphor Icons                                                                                                                                                                                    | Lucide desaconsejada                                                          |
 | Navy `#1E3A5F` + azul `#2563EB` como dos acentos       | Un solo acento (azul). El navy queda como tinta de titulares en modo claro. Sin glows                                                                                                             | Máximo un acento                                                              |
 | GSAP + Framer Motion + Lenis desde el inicio           | Tanda 1 solo con CSS (scroll-driven animations). GSAP para scroll y Motion para estados de UI llegan en la tanda 2, nunca en el mismo componente. Lenis solo desktop y apagado con reduced motion | Regla de no mezclar librerías; rendimiento                                    |
@@ -57,9 +57,11 @@ Salen de los repositorios locales de Juan David. Detalle en `app/data/projects.t
 
 ## Design system
 
-- Tokens en `app/styles/tokens.css`, expuestos a Tailwind en `app/styles/globals.css`.
-- Radios: 8 px controles, 16 px componentes, 24 px cards, 32 px visuales.
-- Tema: `data-theme` en `<html>`; sin valor manda `prefers-color-scheme`. Script en `<head>` para no parpadear.
+Ver `docs/adr/0004-direccion-visual-claro-cian.md`.
+
+- Tokens en `app/styles/tokens.css`: fondo cálido `#F2F1F0`, texto `#2B3033`, acento cian `#15BCDF`. Claro por defecto; oscuro solo con el toggle.
+- Quantico (titulares y UI, mayúsculas), Geist (párrafos), Geist Mono (técnico).
+- Esquinas rectas y chaflanes (`chamfer`, `chamfer-lg`, `chamfer-xl`); titulares escalonados con segunda línea en cian.
 - Motion: solo `transform` y `opacity`; todo se apaga con `prefers-reduced-motion`.
 - Cero guiones largos en el texto del sitio (hay una prueba que lo verifica).
 

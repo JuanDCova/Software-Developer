@@ -4,12 +4,13 @@ import { profile } from "~/data/profile";
 import { useMotion } from "~/motion/use-motion";
 
 const { basePath, alt } = profile.photo;
-const sizes = "(min-width: 768px) 36vw, 80vw";
+const sizes = "(min-width: 768px) 44vw, 90vw";
 const srcSet = (format: string) => `${basePath}-480.${format} 480w, ${basePath}-800.${format} 800w`;
 
 /**
- * Fotografía integrada a la composición: recorte 4:5, revelado con máscara al
- * cargar (CSS), grain fijo y parallax suave al hacer scroll (solo escritorio).
+ * Fotografía pegada al borde derecho, con un velo cian en mix-blend-mode: hue
+ * (como el video teñido de la referencia). Al pasar el cursor el velo se va y
+ * aparece la foto a color. Parallax suave en escritorio.
  */
 export function PhotoFrame() {
   const frameRef = useRef<HTMLDivElement>(null);
@@ -20,12 +21,12 @@ export function PhotoFrame() {
       if (!image) return;
       gsap.fromTo(
         image,
-        { yPercent: -4, scale: 1.1 },
+        { yPercent: -5, scale: 1.12 },
         {
-          yPercent: 6,
-          scale: 1.1,
+          yPercent: 5,
+          scale: 1.12,
           ease: "none",
-          scrollTrigger: { trigger: root, start: "top top+=96", end: "bottom top", scrub: true },
+          scrollTrigger: { trigger: root, start: "top bottom", end: "bottom top", scrub: true },
         },
       );
     });
@@ -34,7 +35,7 @@ export function PhotoFrame() {
   return (
     <div
       ref={frameRef}
-      className="photo-reveal grain relative aspect-[4/5] w-full overflow-hidden rounded-visual bg-surface-2 shadow-[0_40px_80px_-40px_rgb(15_23_42/0.45)]"
+      className="photo-reveal grain group relative aspect-[4/5] w-full max-w-[644px] overflow-hidden bg-surface-2 chamfer-xl"
     >
       <picture>
         <source type="image/avif" srcSet={srcSet("avif")} sizes={sizes} />
@@ -44,11 +45,15 @@ export function PhotoFrame() {
           alt={alt}
           width={800}
           height={1000}
-          fetchPriority="high"
+          loading="lazy"
           decoding="async"
           className="size-full object-cover will-change-transform"
         />
       </picture>
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 z-[1] bg-accent mix-blend-hue transition-opacity duration-700 group-hover:opacity-0"
+      />
     </div>
   );
 }

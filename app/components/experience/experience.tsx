@@ -25,7 +25,7 @@ export function Experience() {
   });
 
   return (
-    <Section id="experiencia" title="Experiencia">
+    <Section id="experiencia" title="Experiencia" accent="laboral">
       <div ref={listRef} className="relative">
         <span
           aria-hidden="true"
@@ -37,15 +37,17 @@ export function Experience() {
             <li key={entry.id} className="reveal relative">
               <span
                 aria-hidden="true"
-                className="absolute top-1.5 -left-[37px] size-2.5 rounded-full border-2 border-accent bg-bg md:-left-[53px]"
+                className="absolute top-1.5 -left-[38px] size-3 rotate-45 border-2 border-accent-border bg-accent md:-left-[54px]"
               />
               <div className="font-mono text-sm text-ink-soft">
                 {entry.period ?? <Pending label="Periodo" />}
               </div>
-              <h3 className="mt-3 font-display text-2xl font-semibold text-brand">
+              <h3 className="mt-3 display-heading text-[clamp(22px,2.6vw,30px)] text-brand">
                 {entry.organization}
               </h3>
-              <div className="mt-1 text-ink-soft">{entry.role ?? <Pending label="Cargo" />}</div>
+              <div className="mt-2 font-display font-bold tracking-[0.06em] text-accent-ink uppercase">
+                {entry.role ?? <Pending label="Cargo" />}
+              </div>
               <p className="mt-4 max-w-[65ch] leading-relaxed text-ink">{entry.summary}</p>
               {entry.technologies.length > 0 ? (
                 <ul className="mt-4 flex flex-wrap gap-2" aria-label="Tecnologías">

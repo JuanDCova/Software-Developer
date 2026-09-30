@@ -23,7 +23,7 @@ function Block({ id, title, children }: { id: string; title: string; children: R
   return (
     <section aria-labelledby={id} className="reveal border-t border-line py-12 md:py-16">
       <div className="grid gap-6 md:grid-cols-[14rem_1fr] md:gap-12">
-        <h2 id={id} className="font-display text-2xl font-semibold text-brand">
+        <h2 id={id} className="display-heading text-2xl text-brand">
           {title}
         </h2>
         <div className="min-w-0">{children}</div>
@@ -53,7 +53,7 @@ export default function Proyecto({ params }: Route.ComponentProps) {
   const next = projects[(index + 1) % projects.length];
 
   return (
-    <article className="mx-auto w-full max-w-6xl px-4 pt-36 pb-24 sm:px-6 md:pt-44">
+    <article className="mx-auto w-full max-w-[90rem] px-[clamp(20px,9vw,118px)] pt-36 pb-24 md:pt-44">
       <Link
         to="/proyectos"
         className="inline-flex items-center gap-2 text-sm text-ink-soft hover:text-ink"
@@ -66,7 +66,7 @@ export default function Proyecto({ params }: Route.ComponentProps) {
         <p className="font-mono text-sm text-ink-soft">
           {project.category}, {project.year}. {statusLabels[project.status]}
         </p>
-        <h1 className="mt-4 font-display text-4xl font-semibold tracking-tight text-balance text-brand md:text-6xl">
+        <h1 className="mt-4 display-heading text-[clamp(40px,7vw,88px)] text-brand">
           {project.title}
         </h1>
         <p className="mt-3 text-xl text-ink-soft">{project.subtitle}</p>
@@ -110,7 +110,7 @@ export default function Proyecto({ params }: Route.ComponentProps) {
             <List items={project.myRole} />
           </div>
           {project.aiAssisted ? (
-            <p className="mt-8 grid max-w-[65ch] grid-cols-[auto_1fr] gap-3 rounded-component bg-accent-soft p-5 leading-relaxed">
+            <p className="mt-8 grid max-w-[65ch] grid-cols-[auto_1fr] gap-3 border-l-4 border-accent bg-accent-soft p-5 leading-relaxed chamfer">
               <Robot size={22} aria-hidden="true" className="text-accent-ink" />
               <span>{project.aiAssisted}</span>
             </p>
@@ -144,10 +144,7 @@ export default function Proyecto({ params }: Route.ComponentProps) {
         <Block id="funcionalidades" title="Funcionalidades">
           <ul className="grid gap-4 sm:grid-cols-2">
             {project.features.map((feature) => (
-              <li
-                key={feature}
-                className="rounded-component border border-line bg-surface p-5 leading-relaxed"
-              >
+              <li key={feature} className="bg-surface p-5 leading-relaxed chamfer">
                 {feature}
               </li>
             ))}
@@ -177,7 +174,7 @@ export default function Proyecto({ params }: Route.ComponentProps) {
             className="group inline-flex flex-col gap-2 text-brand"
           >
             <span className="text-sm text-ink-soft">Siguiente proyecto</span>
-            <span className="inline-flex items-center gap-3 font-display text-3xl font-semibold tracking-tight md:text-4xl">
+            <span className="inline-flex items-center gap-3 display-heading text-[clamp(30px,4vw,48px)]">
               {next.title}
               <ArrowRight
                 size={28}

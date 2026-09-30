@@ -7,7 +7,7 @@ test.describe("home", () => {
   test("el hero dice quién es y qué hace, con los dos CTAs", async ({ page }) => {
     await page.goto("/");
     await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-      "Desarrollador full stack de sistemas de gestión",
+      "Construyo sistemas que organizan tu empresa",
     );
     await expect(page.getByRole("link", { name: "Ver proyectos" }).first()).toBeVisible();
     await expect(page.getByRole("link", { name: "Ver CV" }).first()).toBeVisible();
@@ -15,13 +15,18 @@ test.describe("home", () => {
 
   test("tiene todas las secciones del menú", async ({ page }) => {
     await page.goto("/");
-    for (const name of ["Sobre mí", "Experiencia", "Stack", "Proyectos", "Contacto"]) {
+    for (const name of [
+      "Sobre mí",
+      "Experiencia laboral",
+      "Stack tecnológico",
+      "Proyectos destacados",
+      "Hablemos de tu equipo",
+    ]) {
       await expect(page.getByRole("region", { name, exact: true })).toBeAttached();
     }
   });
 
   test("el toggle de tema invierte el tema y se recuerda", async ({ page }) => {
-    await page.emulateMedia({ colorScheme: "light" });
     await page.goto("/");
     await page.getByRole("button", { name: /modo claro y oscuro/ }).click();
     await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
@@ -84,7 +89,8 @@ test.describe("accesibilidad", () => {
   for (const path of pages) {
     for (const scheme of ["light", "dark"] as const) {
       test(`${path} en modo ${scheme} sin violaciones serias de axe`, async ({ page }) => {
-        await page.emulateMedia({ colorScheme: scheme, reducedMotion: "reduce" });
+        await page.emulateMedia({ reducedMotion: "reduce" });
+        await page.addInitScript((theme) => localStorage.setItem("jdc-theme", theme), scheme);
         await page.goto(path);
         const results = await new AxeBuilder({ page }).analyze();
         const serious = results.violations.filter((v) =>
@@ -162,4 +168,31 @@ test.describe("interacción de escritorio", () => {
     await page.waitForTimeout(500);
     await expect(page.locator("#proyectos")).not.toHaveClass(/is-horizontal/);
   });
+});
+
+test("el modo claro es el estándar aunque el sistema esté en oscuro", async ({ page }) => {
+  await page.emulateMedia({ colorScheme: "dark" });
+  await page.goto("/");
+  await expect(page.locator("html")).not.toHaveAttribute("data-theme", "dark");
+  const background = await page.evaluate(() => getComputedStyle(document.body).backgroundColor);
+  expect(background).toBe("rgb(242, 241, 240)");
+});
+
+test("la hoja de vida tiene la estructura de la HDV", async ({ page }) => {
+  await page.goto("/cv");
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Juan David Cova Salgado");
+  for (const name of [
+    "Contacto",
+    "Educación",
+    "Habilidades",
+    "Idiomas",
+    "Perfil",
+    "Experiencia laboral",
+    "Trayectoria",
+    "Proyectos",
+    "Referencias",
+  ]) {
+    await expect(page.getByRole("heading", { name, exact: true, level: 2 })).toBeVisible();
+  }
+  await expect(page.getByRole("img", { name: /Retrato de Juan David Cova Salgado/ })).toBeVisible();
 });

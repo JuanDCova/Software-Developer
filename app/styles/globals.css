@@ -3,19 +3,11 @@
 @import "./tokens.css";
 
 /* El tema lo decide `data-theme` en <html>; sin él, manda el sistema operativo. */
-@custom-variant dark {
-  &:where([data-theme="dark"], [data-theme="dark"] *) {
-    @slot;
-  }
-  @media (prefers-color-scheme: dark) {
-    &:where(:root:not([data-theme="light"]), :root:not([data-theme="light"]) *) {
-      @slot;
-    }
-  }
-}
+/* El modo claro es el estándar; el oscuro solo se activa con el toggle. */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
 @theme inline {
-  --font-display: "Space Grotesk Variable", "Space Grotesk Fallback", ui-sans-serif, sans-serif;
+  --font-display: "Quantico", "Quantico Fallback", "Arial Narrow", sans-serif;
   --font-sans: "Geist Variable", "Geist Fallback", ui-sans-serif, sans-serif;
   --font-mono: "Geist Mono Variable", "Geist Mono Fallback", ui-monospace, monospace;
 
@@ -30,15 +22,57 @@
   --color-accent: var(--accent);
   --color-accent-ink: var(--accent-ink);
   --color-accent-soft: var(--accent-soft);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-border: var(--accent-border);
+  --color-accent-display: var(--accent-display);
   --color-on-accent: var(--on-accent);
 
-  /* Radios de la spec: controles 8, componentes 16, cards 24, visuales 32. */
-  --radius-control: 8px;
-  --radius-component: 16px;
-  --radius-card: 24px;
-  --radius-visual: 32px;
+  /* Lenguaje angular: esquinas rectas y chaflanes (.chamfer) en botones y paneles. */
+  --radius-control: 2px;
+  --radius-component: 2px;
+  --radius-card: 0px;
+  --radius-visual: 0px;
 
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@utility chamfer {
+  clip-path: polygon(
+    0 0,
+    calc(100% - 12px) 0,
+    100% 12px,
+    100% 100%,
+    12px 100%,
+    0 calc(100% - 12px)
+  );
+}
+@utility chamfer-lg {
+  clip-path: polygon(
+    0 0,
+    calc(100% - 16px) 0,
+    100% 16px,
+    100% 100%,
+    16px 100%,
+    0 calc(100% - 16px)
+  );
+}
+@utility chamfer-xl {
+  clip-path: polygon(
+    0 0,
+    calc(100% - 28px) 0,
+    100% 28px,
+    100% 100%,
+    28px 100%,
+    0 calc(100% - 28px)
+  );
+}
+/* Titulares al estilo de la referencia: mayúsculas, interlineado cerrado. */
+@utility display-heading {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  line-height: 0.98;
 }
 
 @layer base {
@@ -72,7 +106,7 @@
   }
 }
 
-/* Iconos del toggle: se muestra el que corresponde al tema efectivo sin esperar a React. */
+/* Iconos del toggle: se muestra el que corresponde al tema activo sin esperar a React. */
 .show-when-dark {
   display: none;
 }
@@ -81,14 +115,6 @@
 }
 [data-theme="dark"] .show-when-light {
   display: none;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .show-when-dark {
-    display: inline-flex;
-  }
-  :root:not([data-theme="light"]) .show-when-light {
-    display: none;
-  }
 }
 
 /*
@@ -119,14 +145,12 @@
     animation-delay: calc(120ms + var(--i, 0) * 70ms);
   }
 
-  .photo-reveal {
-    animation: photo-reveal 1100ms var(--ease-out-expo) 150ms both;
-  }
-  .photo-reveal img {
-    animation: photo-settle 1400ms var(--ease-out-expo) 150ms both;
-  }
-
   @supports (animation-timeline: view()) {
+    .photo-reveal {
+      animation: photo-reveal linear both;
+      animation-timeline: view();
+      animation-range: entry 5% entry 75%;
+    }
     .reveal {
       animation: reveal linear both;
       animation-timeline: view();
@@ -150,16 +174,17 @@
 
 @keyframes photo-reveal {
   from {
-    clip-path: inset(18% 12% 18% 12% round 32px);
+    clip-path: polygon(14% 10%, 86% 10%, 86% 90%, 14% 90%);
   }
   to {
-    clip-path: inset(0 0 0 0 round 32px);
-  }
-}
-
-@keyframes photo-settle {
-  from {
-    transform: scale(1.12);
+    clip-path: polygon(
+      0 0,
+      calc(100% - 28px) 0,
+      100% 28px,
+      100% 100%,
+      28px 100%,
+      0 calc(100% - 28px)
+    );
   }
 }
 
@@ -202,20 +227,26 @@ html.lenis body {
   .reveal {
     animation: none !important;
   }
+  /* La hoja de vida se imprime en A4 con sus colores. */
+  @page {
+    size: A4;
+    margin: 0;
+  }
+  .cv-sheet {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+    clip-path: none;
+    grid-template-columns: 260px 1fr;
+  }
 }
 
 /* Showcase de proyectos: apilado por defecto, horizontal fijado en escritorio. */
 .showcase-track {
   display: grid;
   gap: 1.5rem;
-  max-width: 72rem;
+  max-width: 90rem;
   margin-inline: auto;
-  padding-inline: 1rem;
-}
-@media (min-width: 640px) {
-  .showcase-track {
-    padding-inline: 1.5rem;
-  }
+  padding-inline: clamp(20px, 9vw, 118px);
 }
 .showcase.is-horizontal {
   display: flex;
@@ -224,6 +255,12 @@ html.lenis body {
   justify-content: center;
   overflow: hidden;
   padding-block: 6rem 1.5rem;
+}
+.showcase.is-horizontal .showcase-lead {
+  display: none;
+}
+.showcase.is-horizontal h2 {
+  font-size: clamp(30px, 4vw, 52px);
 }
 .showcase.is-horizontal .showcase-viewport {
   margin-top: 2rem;
@@ -234,7 +271,7 @@ html.lenis body {
   max-width: none;
   margin: 0;
   gap: 2rem;
-  padding-inline: max(1.5rem, calc((100vw - 72rem) / 2 + 1.5rem));
+  padding-inline: max(clamp(20px, 9vw, 118px), calc((100vw - 90rem) / 2 + 118px));
 }
 .showcase.is-horizontal .showcase-item {
   width: min(78vw, 62rem);

@@ -15,9 +15,10 @@ function supportsWebGL() {
 }
 
 /**
- * Decide si vale la pena cargar la escena 3D: escritorio, puntero fino, sin
- * reduced motion, WebGL disponible y al menos 4 núcleos. Espera a que el
- * navegador esté libre para no competir con el primer render.
+ * Visual del hero en el lugar del video de la referencia: la red de nodos.
+ * Siempre se ve el póster estático (una captura de la misma red); en
+ * escritorio capaz se reemplaza por la escena 3D en vivo cuando el navegador
+ * queda libre. En mobile va arriba y el texto queda debajo.
  */
 export function HeroBackdrop() {
   const [enabled, setEnabled] = useState(false);
@@ -41,8 +42,16 @@ export function HeroBackdrop() {
   return (
     <div
       aria-hidden="true"
-      className="pointer-events-none absolute inset-0 -z-10 [mask-image:linear-gradient(to_right,transparent_0%,transparent_30%,black_70%)]"
+      className="pointer-events-none absolute top-0 -left-[12%] -z-20 h-[380px] w-[124%] md:top-0 md:right-[-20%] md:left-auto md:h-full md:w-[99%]"
     >
+      <img
+        src="/img/red-nodos.svg"
+        alt=""
+        width={1600}
+        height={1000}
+        decoding="async"
+        className={`absolute inset-0 size-full object-contain transition-opacity duration-1000 ${enabled ? "opacity-0" : "opacity-100"}`}
+      />
       {enabled ? (
         <Suspense fallback={null}>
           <NeuralScene />

@@ -1,53 +1,47 @@
 /*
- * Tokens de color. Paleta de la spec con un solo acento (azul).
- * El navy #1E3A5F queda como tinta de marca para titulares en modo claro.
- * Contrastes verificados contra el fondo de cada tema (WCAG AA o superior).
+ * Tokens de color. Base cálida clara (#F2F1F0) con acento cian (#15BCDF),
+ * adaptado de la referencia visual "Targo". El claro es el estándar; el
+ * oscuro solo aparece si el visitante lo elige con el toggle.
+ * Contrastes verificados (WCAG AA):
+ * - ink 11.8:1, ink-soft 5.5:1 sobre bg.
+ * - El cian puro (#15BCDF) solo como relleno, con texto #1A1C1E (7.6:1).
+ * - accent-ink (enlaces, texto pequeño) 5.0:1; accent-display (titulares
+ *   grandes) 3.35:1, válido para texto grande.
  */
 :root {
-  --bg: #f8fafc;
-  --surface: #fdfeff;
-  --surface-2: #f1f5f9;
-  --line: #e2e8f0;
-  --line-strong: #cbd5e1;
-  --ink: #1e293b;
-  --ink-soft: #475569;
-  --brand: #1e3a5f;
-  --accent: #2563eb;
-  --accent-ink: #1d4ed8;
-  --accent-soft: #e6eefe;
-  --on-accent: #f8fafc;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #020617;
-    --surface: #0f172a;
-    --surface-2: #111827;
-    --line: #1e293b;
-    --line-strong: #334155;
-    --ink: #f8fafc;
-    --ink-soft: #94a3b8;
-    --brand: #f8fafc;
-    --accent: #2563eb;
-    --accent-ink: #60a5fa;
-    --accent-soft: #0c1a3d;
-    --on-accent: #f8fafc;
-    color-scheme: dark;
-  }
+  --bg: #f2f1f0;
+  --surface: #f7f6f8;
+  --surface-2: #e9e7e4;
+  --line: #dcd9d5;
+  --line-strong: #b9b5b0;
+  --ink: #2b3033;
+  --ink-soft: #5d6164;
+  --brand: #2b3033;
+  --accent: #15bcdf;
+  --accent-hover: #3fd0ef;
+  --accent-border: #0fa3c2;
+  --accent-ink: #0a7189;
+  --accent-display: #0e8fae;
+  --accent-soft: #d6f0f6;
+  --on-accent: #1a1c1e;
+  color-scheme: light;
 }
 
 :root[data-theme="dark"] {
-  --bg: #020617;
-  --surface: #0f172a;
-  --surface-2: #111827;
-  --line: #1e293b;
-  --line-strong: #334155;
-  --ink: #f8fafc;
-  --ink-soft: #94a3b8;
-  --brand: #f8fafc;
-  --accent: #2563eb;
-  --accent-ink: #60a5fa;
-  --accent-soft: #0c1a3d;
-  --on-accent: #f8fafc;
+  --bg: #111416;
+  --surface: #1a2024;
+  --surface-2: #20272c;
+  --line: #2a3237;
+  --line-strong: #3a454c;
+  --ink: #edebe8;
+  --ink-soft: #9aa1a6;
+  --brand: #edebe8;
+  --accent: #15bcdf;
+  --accent-hover: #3fd0ef;
+  --accent-border: #0fa3c2;
+  --accent-ink: #15bcdf;
+  --accent-display: #15bcdf;
+  --accent-soft: #0f2a31;
+  --on-accent: #1a1c1e;
   color-scheme: dark;
 }

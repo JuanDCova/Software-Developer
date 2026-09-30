@@ -13,10 +13,8 @@ export const meta: Route.MetaFunction = () =>
 
 export default function Proyectos() {
   return (
-    <div className="mx-auto w-full max-w-6xl px-4 pt-36 pb-24 sm:px-6 md:pt-44">
-      <h1 className="font-display text-4xl font-semibold tracking-tight text-brand md:text-6xl">
-        Proyectos
-      </h1>
+    <div className="mx-auto w-full max-w-[90rem] px-[clamp(20px,9vw,118px)] pt-36 pb-24 md:pt-44">
+      <h1 className="display-heading text-[clamp(40px,7vw,88px)] text-brand">Proyectos</h1>
       <p className="mt-4 max-w-[60ch] text-lg leading-relaxed text-ink-soft">
         Cada caso dice qué problema resuelve, cómo está construido y qué parte hice yo. Cuando una
         IA escribió parte del código, también lo digo.

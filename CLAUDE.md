@@ -8,14 +8,15 @@ React Router en modo framework con `ssr: false` + `prerender` (ver `docs/adr/000
 
 ## Comandos
 
-`npm run dev`, `npm run typecheck`, `npm run lint`, `npm run test`, `npm run build`, `npm run test:e2e` (hace falta build), `npm run lhci`, `npm run og` (regenera `public/og.png`).
+`npm run dev`, `npm run typecheck`, `npm run lint`, `npm run test`, `npm run build`, `npm run test:e2e` (hace falta build), `npm run lhci`, `npm run poster` (SVG de la red), `npm run og` (regenera `public/og.png`).
 
 ## Reglas
 
 - Sitio solo en español. Cero guiones largos (U+2014) y en-dash (U+2013) en texto visible; `app/data/content.test.ts` lo verifica sobre los datos.
 - Contenido verificable: nada de cargos, fechas, métricas, capturas o enlaces inventados. Lo que falte va como `null` y se muestra con `<Pending>`.
 - Cada proyecto dice qué hizo Juan David (`myRole`) y si una IA escribió parte del código (`aiAssisted`).
-- Colores solo desde los tokens (`bg-bg`, `text-ink`, `text-ink-soft`, `bg-accent`, `border-line`...). Un solo acento. Radios `rounded-control|component|card|visual`.
+- Colores solo desde los tokens (`bg-bg`, `text-ink`, `text-ink-soft`, `bg-accent`, `text-accent-ink`, `text-accent-display`...). Cian puro solo como relleno. Claro por defecto (ADR 0004).
+- Forma: esquinas rectas y chaflanes (`chamfer`, `chamfer-lg`, `chamfer-xl`); titulares con `display-heading` o `StairHeading`.
 - Motion: solo transform y opacity, siempre con `prefers-reduced-motion`. Sin preloader, sin cursor custom, sin scroll cues, sin `window.addEventListener("scroll")`.
 - GSAP, ScrollTrigger y Lenis solo vía `app/motion/` (`useMotion` hace el import dinámico y limpia al desmontar). No se usa la librería Motion.
 - Escena 3D en `app/components/three/`, cargada por `HeroBackdrop` solo en escritorio.

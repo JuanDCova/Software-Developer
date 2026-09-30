@@ -7,7 +7,7 @@ export function NotFound() {
   return (
     <div className="mx-auto w-full max-w-3xl px-4 pt-40 pb-32 sm:px-6">
       <p className="font-mono text-sm text-ink-soft">Error 404</p>
-      <h1 className="mt-4 font-display text-4xl font-semibold tracking-tight text-brand md:text-6xl">
+      <h1 className="mt-4 display-heading text-[clamp(40px,7vw,80px)] text-brand">
         Página no encontrada
       </h1>
       <p className="mt-6 max-w-[48ch] text-lg leading-relaxed text-ink-soft">

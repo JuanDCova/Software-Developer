@@ -15,6 +15,7 @@ export function Stack() {
     <Section
       id="stack"
       title="Stack"
+      accent="tecnológico"
       lead="Sin porcentajes de dominio. Cada tecnología enlaza a los proyectos donde la usé."
     >
       <div className="reveal mb-16 md:mb-24">
@@ -23,7 +24,7 @@ export function Stack() {
       <div className="grid gap-x-10 gap-y-12 sm:grid-cols-2 xl:grid-cols-4">
         {skills.map((category) => (
           <div key={category.id} className="reveal">
-            <h3 className="border-b border-line pb-3 font-display text-lg font-semibold text-brand">
+            <h3 className="border-b-2 border-brand pb-3 display-heading text-lg text-brand">
               {category.name}
             </h3>
             <ul className="mt-4 space-y-4">
