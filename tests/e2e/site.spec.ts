@@ -196,3 +196,32 @@ test("la hoja de vida tiene la estructura de la HDV", async ({ page }) => {
   }
   await expect(page.getByRole("img", { name: /Retrato de Juan David Cova Salgado/ })).toBeVisible();
 });
+
+test.describe("navegación desde la home con movimiento activo", () => {
+  test.skip(({ isMobile }) => isMobile, "El pin horizontal solo existe en escritorio");
+
+  for (const name of ["Ver CV", "Ver trayectoria"]) {
+    test(`"${name}" abre el CV sin la vista de error`, async ({ page }) => {
+      const errors: string[] = [];
+      page.on("pageerror", (error) => errors.push(error.message));
+      page.on("console", (message) => {
+        if (message.type() === "error") errors.push(message.text());
+      });
+      await page.goto("/");
+      await expect(page.locator("#proyectos")).toHaveClass(/is-horizontal/);
+      await page.getByRole("link", { name }).first().click();
+      await expect(page).toHaveURL(/\/cv$/);
+      await expect(page.getByRole("heading", { level: 1 })).toHaveText("Juan David Cova Salgado");
+      await expect(page.getByText("Algo salió mal")).toHaveCount(0);
+      expect(errors.filter((e) => !e.includes("THREE."))).toEqual([]);
+    });
+  }
+
+  test("ir a un proyecto desde la red de tecnologías no rompe la página", async ({ page }) => {
+    await page.goto("/");
+    await expect(page.locator("#proyectos")).toHaveClass(/is-horizontal/);
+    await page.locator("#stack").getByRole("link", { name: "SGTAL", exact: true }).first().click();
+    await expect(page).toHaveURL(/\/proyectos\/sgtal$/);
+    await expect(page.getByText("Algo salió mal")).toHaveCount(0);
+  });
+});

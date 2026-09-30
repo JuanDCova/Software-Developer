@@ -103,43 +103,48 @@ export function ProjectShowcase() {
   });
 
   return (
-    <section
-      ref={sectionRef}
-      id="proyectos"
-      aria-labelledby="proyectos-titulo"
-      className="showcase py-[clamp(72px,10vw,140px)]"
-    >
-      <div className="mx-auto w-full max-w-[90rem] px-[clamp(20px,9vw,118px)]">
-        <div className="reveal">
-          <StairHeading id="proyectos-titulo" title="Proyectos" accent="destacados" />
-          <p className="showcase-lead mt-8 max-w-[520px] pl-[min(160px,18vw)] text-[clamp(15px,1.6vw,17px)] leading-[1.7] text-ink-soft">
-            Casos reales con el problema, la arquitectura y lo que hice yo en cada uno.
-          </p>
+    // Contenedor estable para React: ScrollTrigger envuelve la sección fijada en un
+    // "pin-spacer". Si la sección fuera hija directa de <main>, al salir de la home
+    // React intentaría quitarla de un padre que ya no es el suyo (removeChild).
+    <div>
+      <section
+        ref={sectionRef}
+        id="proyectos"
+        aria-labelledby="proyectos-titulo"
+        className="showcase py-[clamp(72px,10vw,140px)]"
+      >
+        <div className="mx-auto w-full max-w-[90rem] px-[clamp(20px,9vw,118px)]">
+          <div className="reveal">
+            <StairHeading id="proyectos-titulo" title="Proyectos" accent="destacados" />
+            <p className="showcase-lead mt-8 max-w-[520px] pl-[min(160px,18vw)] text-[clamp(15px,1.6vw,17px)] leading-[1.7] text-ink-soft">
+              Casos reales con el problema, la arquitectura y lo que hice yo en cada uno.
+            </p>
+          </div>
         </div>
-      </div>
 
-      <div className="showcase-viewport mt-12 md:mt-16">
-        <ul className="showcase-track">
-          {featured.map((project, index) => (
-            <li key={project.slug} className="showcase-item reveal">
-              <Panel project={project} tone={tones[index % tones.length] ?? tones[0]!} />
-            </li>
-          ))}
-          <li className="showcase-item showcase-end">
-            <div className="flex h-full flex-col justify-center gap-6 border-2 border-dashed border-line-strong p-8 sm:p-10">
-              <p className="display-heading text-[clamp(24px,2.6vw,34px)] text-brand">
-                {projects.length - featured.length} proyectos más, con el mismo nivel de detalle.
-              </p>
-              <div>
-                <ButtonLink to="/proyectos" variant="secondary">
-                  Ver los {projects.length} proyectos
-                  <ArrowRight size={16} weight="bold" aria-hidden="true" />
-                </ButtonLink>
+        <div className="showcase-viewport mt-12 md:mt-16">
+          <ul className="showcase-track">
+            {featured.map((project, index) => (
+              <li key={project.slug} className="showcase-item reveal">
+                <Panel project={project} tone={tones[index % tones.length] ?? tones[0]!} />
+              </li>
+            ))}
+            <li className="showcase-item showcase-end">
+              <div className="flex h-full flex-col justify-center gap-6 border-2 border-dashed border-line-strong p-8 sm:p-10">
+                <p className="display-heading text-[clamp(24px,2.6vw,34px)] text-brand">
+                  {projects.length - featured.length} proyectos más, con el mismo nivel de detalle.
+                </p>
+                <div>
+                  <ButtonLink to="/proyectos" variant="secondary">
+                    Ver los {projects.length} proyectos
+                    <ArrowRight size={16} weight="bold" aria-hidden="true" />
+                  </ButtonLink>
+                </div>
               </div>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </section>
+            </li>
+          </ul>
+        </div>
+      </section>
+    </div>
   );
 }
