@@ -18,6 +18,7 @@
     "lhci": "lhci autorun",
     "postbuild": "node scripts/postbuild.mjs",
     "og": "node scripts/generate-og.mjs",
+    "captures": "node scripts/captures.mjs",
     "poster": "node scripts/generate-poster.ts",
     "deploy": "npm run build && vercel deploy --prod",
     "deploy:preview": "vercel deploy",

@@ -5,6 +5,7 @@ import { Link } from "react-router";
 import type { Route } from "./+types/proyecto";
 import { ArchitectureDiagram } from "~/components/architecture/architecture-diagram";
 import { TagList } from "~/components/common/tag";
+import { ProjectCaptures } from "~/components/projects/project-captures";
 import { getProjectBySlug, projects, statusLabels } from "~/data/projects";
 import { NotFound } from "~/routes/404";
 import { pageMeta } from "~/utils/seo";
@@ -134,6 +135,12 @@ export default function Proyecto({ params }: Route.ComponentProps) {
         <Block id="tecnologia" title="Tecnología">
           <TagList items={project.technologies} label="Tecnologías" />
         </Block>
+
+        {project.image ? (
+          <Block id="capturas" title="Capturas">
+            <ProjectCaptures project={project} />
+          </Block>
+        ) : null}
 
         <Block id="funcionalidades" title="Funcionalidades">
           <ul className="grid gap-4 sm:grid-cols-2">

@@ -6,6 +6,7 @@ import { ArchitectureDiagram } from "~/components/architecture/architecture-diag
 import { ButtonLink } from "~/components/common/button-link";
 import { StairHeading } from "~/components/common/section";
 import { TagList } from "~/components/common/tag";
+import { ProjectImage } from "~/components/projects/project-captures";
 import { getFeaturedProjects, projects, statusLabels } from "~/data/projects";
 import type { Project } from "~/data/types";
 import { useMotion } from "~/motion/use-motion";
@@ -60,7 +61,15 @@ function Panel({ project, tone }: { project: Project; tone: string }) {
         </div>
       </div>
 
-      {project.architecture ? (
+      {project.image ? (
+        <div className="self-center overflow-hidden rounded-card border border-line">
+          <ProjectImage
+            src={project.image}
+            alt={`Captura de ${project.title}, con datos de demostración`}
+            className="block h-auto w-full"
+          />
+        </div>
+      ) : project.architecture ? (
         <div className="self-center">
           <ArchitectureDiagram architecture={project.architecture} variant="dense" />
         </div>

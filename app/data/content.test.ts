@@ -1,3 +1,5 @@
+import { existsSync } from "node:fs";
+import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 
 import { experience } from "./experience";
@@ -45,6 +47,19 @@ describe("proyectos", () => {
     for (const project of projects) {
       for (const src of [project.image, ...project.gallery].filter(Boolean)) {
         expect(src).toMatch(/^\//);
+      }
+    }
+  });
+
+  it("las capturas existen en public/ con sus variantes responsive", () => {
+    for (const project of projects) {
+      for (const src of [project.image, ...project.gallery]) {
+        if (!src) continue;
+        expect(existsSync(join(process.cwd(), "public", src)), src).toBe(true);
+        const base = src.replace(/-1440\.webp$/, "");
+        for (const sibling of [`${base}-1440.avif`, `${base}-720.avif`, `${base}-720.webp`]) {
+          expect(existsSync(join(process.cwd(), "public", sibling)), sibling).toBe(true);
+        }
       }
     }
   });

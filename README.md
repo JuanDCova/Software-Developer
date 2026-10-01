@@ -26,6 +26,7 @@ npm run dev
 | `npm run test:e2e`  | Playwright: navegación, prerender y accesibilidad con axe en ambos temas (requiere build) |
 | `npm run lhci`      | Lighthouse CI con presupuestos de rendimiento                                             |
 | `npm run og`        | Regenera `public/og.png`                                                                  |
+| `npm run captures`  | Capturas demo a `public/proyectos/<slug>/` (ver `docs/CAPTURAS.md`)                       |
 
 ## Estructura
 

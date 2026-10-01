@@ -6,7 +6,10 @@ import type { Project, ProjectStatus } from "./types";
  * - `myRole` describe solo lo que aparece con la firma de Juan David en git.
  * - Si parte del código lo generó una IA, `aiAssisted` lo dice.
  * - `results` vacío: todavía no hay métricas verificadas, no se muestran.
- * - `image: null` y sin enlaces a repositorios hasta que Juan David confirme
+ * - `image` y `gallery` apuntan a capturas reales con datos demo en
+ *   `public/proyectos/<slug>/` (generadas con `node scripts/captures.mjs`).
+ *   ERP y Palatsi son confidenciales: sin capturas ni enlaces.
+ * - Sin enlaces a repositorios hasta que Juan David confirme
  *   qué es público (ver docs/CONTENIDO_PENDIENTE.md).
  */
 export const projects: Project[] = [
@@ -133,8 +136,8 @@ export const projects: Project[] = [
       "Nginx",
       "GitHub Actions",
     ],
-    image: null,
-    gallery: [],
+    image: "/proyectos/sgtal/dashboard-1440.webp",
+    gallery: ["/proyectos/sgtal/ordenes-1440.webp", "/proyectos/sgtal/logistica-1440.webp"],
     featured: true,
     status: "en-desarrollo",
     problem:
@@ -223,8 +226,11 @@ export const projects: Project[] = [
       "Docker",
       "GitHub Actions",
     ],
-    image: null,
-    gallery: [],
+    image: "/proyectos/nexora-platform/catalogo-1440.webp",
+    gallery: [
+      "/proyectos/nexora-platform/dashboard-1440.webp",
+      "/proyectos/nexora-platform/login-1440.webp",
+    ],
     featured: true,
     status: "en-desarrollo",
     problem:
@@ -363,8 +369,8 @@ export const projects: Project[] = [
       "PostgreSQL",
       "Docker",
     ],
-    image: null,
-    gallery: [],
+    image: "/proyectos/pracxu/cursos-1440.webp",
+    gallery: ["/proyectos/pracxu/home-1440.webp", "/proyectos/pracxu/curso-detalle-1440.webp"],
     featured: false,
     status: "en-desarrollo",
     problem:
@@ -402,8 +408,8 @@ export const projects: Project[] = [
     year: 2026,
     category: "Frontend",
     technologies: ["React", "TypeScript", "Vite", "React Router", "Tailwind CSS", "GitHub Actions"],
-    image: null,
-    gallery: [],
+    image: "/proyectos/jdc-digital-portfolio/home-1440.webp",
+    gallery: ["/proyectos/jdc-digital-portfolio/proyecto-1440.webp"],
     featured: false,
     github: "https://github.com/JuanDCova/Software-Developer",
     status: "en-desarrollo",
