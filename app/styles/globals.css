@@ -200,6 +200,67 @@ html.lenis body {
   overflow: clip;
 }
 
+/*
+ * Capturas de proyectos: zoom lento al pasar sobre la card y entrada de la
+ * captura principal en la página de detalle (solo transform: es el LCP).
+ */
+@media (prefers-reduced-motion: no-preference) {
+  .capture-zoom {
+    transition: transform 900ms var(--ease-out-expo);
+  }
+  .group:hover .capture-zoom,
+  .group\/capture:hover .capture-zoom {
+    transform: scale(1.035);
+  }
+  .hero-capture {
+    animation: capture-rise 1100ms var(--ease-out-expo) 150ms both;
+  }
+}
+
+@keyframes capture-rise {
+  from {
+    transform: translateY(48px) scale(0.97);
+  }
+}
+
+/* Visor de capturas (<dialog>): ocupa la pantalla y bloquea el scroll de atrás. */
+.lightbox {
+  width: 100%;
+  height: 100%;
+  place-content: center;
+}
+.lightbox[open] {
+  display: grid;
+}
+.lightbox::backdrop {
+  background: var(--scrim);
+  backdrop-filter: blur(6px);
+}
+html:has(.lightbox[open]) {
+  overflow: hidden;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .lightbox[open] .lightbox-image {
+    animation: lightbox-in 420ms var(--ease-out-expo);
+  }
+  .lightbox[open]::backdrop {
+    animation: scrim-in 300ms ease-out;
+  }
+}
+
+@keyframes lightbox-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+}
+
+@keyframes scrim-in {
+  from {
+    opacity: 0;
+  }
+}
+
 @keyframes reveal {
   from {
     opacity: 0;

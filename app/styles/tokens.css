@@ -24,6 +24,8 @@
   --accent-display: #0e8fae;
   --accent-soft: #d6f0f6;
   --on-accent: #1a1c1e;
+  /* Fondo del visor de capturas: oscuro en ambos temas para que la imagen mande. */
+  --scrim: rgb(17 20 22 / 0.88);
   color-scheme: light;
 }
 
@@ -43,5 +45,6 @@
   --accent-display: #15bcdf;
   --accent-soft: #0f2a31;
   --on-accent: #1a1c1e;
+  --scrim: rgb(8 10 11 / 0.9);
   color-scheme: dark;
 }

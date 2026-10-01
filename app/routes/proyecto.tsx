@@ -5,7 +5,7 @@ import { Link } from "react-router";
 import type { Route } from "./+types/proyecto";
 import { ArchitectureDiagram } from "~/components/architecture/architecture-diagram";
 import { TagList } from "~/components/common/tag";
-import { ProjectCaptures } from "~/components/projects/project-captures";
+import { ProjectCaptures, ProjectHeroCapture } from "~/components/projects/project-captures";
 import { getProjectBySlug, projects, statusLabels } from "~/data/projects";
 import { NotFound } from "~/routes/404";
 import { pageMeta } from "~/utils/seo";
@@ -95,6 +95,12 @@ export default function Proyecto({ params }: Route.ComponentProps) {
         </div>
       </header>
 
+      {project.image ? (
+        <div className="mt-14 md:mt-20">
+          <ProjectHeroCapture project={project} />
+        </div>
+      ) : null}
+
       <div className="mt-16">
         <Block id="problema" title="Problema">
           <p className="max-w-[65ch] text-lg leading-relaxed">{project.problem}</p>
@@ -136,8 +142,8 @@ export default function Proyecto({ params }: Route.ComponentProps) {
           <TagList items={project.technologies} label="Tecnologías" />
         </Block>
 
-        {project.image ? (
-          <Block id="capturas" title="Capturas">
+        {project.gallery.length > 0 ? (
+          <Block id="capturas" title="Más vistas">
             <ProjectCaptures project={project} />
           </Block>
         ) : null}

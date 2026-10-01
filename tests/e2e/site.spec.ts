@@ -225,3 +225,28 @@ test.describe("navegación desde la home con movimiento activo", () => {
     await expect(page.getByText("Algo salió mal")).toHaveCount(0);
   });
 });
+
+test.describe("capturas de proyectos", () => {
+  test("la captura principal se abre en el visor y se navega con el teclado", async ({ page }) => {
+    await page.goto("/proyectos/sgtal");
+    await page.getByRole("button", { name: "Ampliar captura: Panel principal" }).click();
+    const viewer = page.getByRole("dialog", { name: "Capturas de SGTAL" });
+    await expect(viewer).toBeVisible();
+    await expect(viewer.getByText("Panel principal (1 de 3)")).toBeVisible();
+    await page.keyboard.press("ArrowRight");
+    await expect(viewer.getByText("Lista de órdenes (2 de 3)")).toBeVisible();
+    const image = viewer.getByRole("img", { name: /Lista de órdenes de SGTAL/ });
+    await expect
+      .poll(() => image.evaluate((img: HTMLImageElement) => img.naturalWidth))
+      .toBeGreaterThan(0);
+    await page.keyboard.press("Escape");
+    await expect(viewer).toBeHidden();
+  });
+
+  test("un proyecto confidencial no publica capturas", async ({ page }) => {
+    await page.goto("/proyectos");
+    await expect(page.getByText("Proyecto confidencial")).toHaveCount(1);
+    await page.goto("/proyectos/erp-educacion-superior");
+    await expect(page.getByRole("button", { name: /Ampliar captura/ })).toHaveCount(0);
+  });
+});

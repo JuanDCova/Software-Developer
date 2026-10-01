@@ -6,7 +6,7 @@ import { ArchitectureDiagram } from "~/components/architecture/architecture-diag
 import { ButtonLink } from "~/components/common/button-link";
 import { StairHeading } from "~/components/common/section";
 import { TagList } from "~/components/common/tag";
-import { ProjectImage } from "~/components/projects/project-captures";
+import { CaptureFrame, ConfidentialVisual } from "~/components/projects/project-captures";
 import { getFeaturedProjects, projects, statusLabels } from "~/data/projects";
 import type { Project } from "~/data/types";
 import { useMotion } from "~/motion/use-motion";
@@ -61,19 +61,19 @@ function Panel({ project, tone }: { project: Project; tone: string }) {
         </div>
       </div>
 
-      {project.image ? (
-        <div className="self-center overflow-hidden rounded-card border border-line">
-          <ProjectImage
+      <div className="self-center">
+        {project.image ? (
+          <CaptureFrame
+            project={project}
             src={project.image}
-            alt={`Captura de ${project.title}, con datos de demostración`}
-            className="block h-auto w-full"
+            sizes="(min-width: 1024px) 40vw, 92vw"
           />
-        </div>
-      ) : project.architecture ? (
-        <div className="self-center">
+        ) : project.architecture ? (
           <ArchitectureDiagram architecture={project.architecture} variant="dense" />
-        </div>
-      ) : null}
+        ) : (
+          <ConfidentialVisual />
+        )}
+      </div>
     </article>
   );
 }
@@ -94,7 +94,7 @@ export function ProjectShowcase() {
       section.classList.add("is-horizontal");
       const distance = () => track.scrollWidth - window.innerWidth;
 
-      gsap.to(track, {
+      const pan = gsap.to(track, {
         x: () => -distance(),
         ease: "none",
         scrollTrigger: {
@@ -105,6 +105,44 @@ export function ProjectShowcase() {
           scrub: 1,
           invalidateOnRefresh: true,
         },
+      });
+
+      // Profundidad: la captura se desliza dentro de su marco más lento que el
+      // panel, ligada al avance horizontal.
+      section.querySelectorAll<HTMLElement>("[data-capture] img").forEach((image) => {
+        gsap.fromTo(
+          image,
+          { xPercent: -4, scale: 1.1 },
+          {
+            xPercent: 4,
+            scale: 1.1,
+            ease: "none",
+            scrollTrigger: {
+              trigger: image,
+              containerAnimation: pan,
+              start: "left right",
+              end: "right left",
+              scrub: true,
+            },
+          },
+        );
+      });
+
+      // Cada panel entra con su contenido escalonado al acercarse al centro.
+      section.querySelectorAll<HTMLElement>(".showcase-panel").forEach((panel) => {
+        gsap.from(panel.querySelectorAll(":scope > div:first-child > *"), {
+          y: 24,
+          opacity: 0,
+          stagger: 0.05,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: panel,
+            containerAnimation: pan,
+            start: "left 85%",
+            end: "left 45%",
+            scrub: true,
+          },
+        });
       });
 
       return () => section.classList.remove("is-horizontal");

@@ -3,7 +3,7 @@ import { Link } from "react-router";
 
 import { ArchitectureDiagram } from "~/components/architecture/architecture-diagram";
 import { TagList } from "~/components/common/tag";
-import { ProjectImage } from "~/components/projects/project-captures";
+import { CaptureFrame, ConfidentialVisual } from "~/components/projects/project-captures";
 import { statusLabels } from "~/data/projects";
 import type { Project } from "~/data/types";
 
@@ -25,7 +25,8 @@ interface ProjectCardProps {
 
 /**
  * Card de proyecto. El visual es la captura real con datos demo cuando existe;
- * si no, la arquitectura del sistema. Nunca una imagen inventada.
+ * si no, la arquitectura del sistema, y si tampoco hay, el aviso de proyecto
+ * confidencial. Nunca una imagen inventada.
  */
 export function ProjectCard({
   project,
@@ -39,24 +40,22 @@ export function ProjectCard({
     <article
       className={`group relative flex h-full flex-col overflow-hidden chamfer-xl ${tones[tone]} transition-transform duration-300 hover:-translate-y-0.5`}
     >
-      {project.image ? (
-        <div className="p-4 pb-0 sm:p-6 sm:pb-0">
-          <div className="overflow-hidden rounded-component border border-line">
-            <ProjectImage
-              src={project.image}
-              alt={`Captura de ${project.title}, con datos de demostración`}
-              className="block h-auto w-full transition-transform duration-300 group-hover:scale-[1.01]"
-            />
-          </div>
-        </div>
-      ) : project.architecture ? (
-        <div className="p-4 pb-0 sm:p-6 sm:pb-0">
+      <div className="p-4 pb-0 sm:p-6 sm:pb-0">
+        {project.image ? (
+          <CaptureFrame
+            project={project}
+            src={project.image}
+            sizes="(min-width: 768px) 42vw, 92vw"
+          />
+        ) : project.architecture ? (
           <ArchitectureDiagram
             architecture={project.architecture}
             variant={size === "large" ? "full" : "compact"}
           />
-        </div>
-      ) : null}
+        ) : (
+          <ConfidentialVisual />
+        )}
+      </div>
 
       <div className="flex flex-1 flex-col p-6 sm:p-8">
         <p className="font-mono text-xs text-ink-soft">
