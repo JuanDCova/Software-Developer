@@ -5,6 +5,13 @@
   "outputDirectory": "build/client",
   "cleanUrls": true,
   "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/proyectos/sgtal",
+      "destination": "/proyectos/orbitra",
+      "permanent": true
+    }
+  ],
   "headers": [
     {
       "source": "/assets/(.*)",

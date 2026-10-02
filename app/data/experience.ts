@@ -26,7 +26,7 @@ export const experience: ExperienceEntry[] = [
     organization: "Proyectos independientes",
     period: "2026",
     summary:
-      "Plataformas a medida, desde el levantamiento de requisitos hasta el despliegue: trazabilidad de activos y logística con asistente de IA (SGTAL), un LMS y CMS multi-tenant (Nexora) y un LMS de cursos cortos (Pracxu).",
+      "Plataformas a medida, desde el levantamiento de requisitos hasta el despliegue: trazabilidad de activos y logística con asistente de IA (Orbitra), un LMS y CMS multi-tenant (Nexora) y un LMS de cursos cortos (Pracxu).",
     technologies: ["Django", "React", "TypeScript", "PostgreSQL", "Celery", "Redis", "Docker"],
   },
   {

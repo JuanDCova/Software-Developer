@@ -1,5 +1,5 @@
 // Capturas con datos demo para el portafolio (tanda 4).
-// Uso: node scripts/captures.mjs --site nexora|lms|sgtal|portfolio
+// Uso: node scripts/captures.mjs --site nexora|lms|orbitra|portfolio
 // Requiere el stack correspondiente arriba (ver docs/CAPTURAS.md).
 // Salida: public/proyectos/<slug>/{vista}-1440.{avif,webp} + {vista}-720.{avif,webp}
 import { mkdirSync } from "node:fs";
@@ -35,8 +35,8 @@ const SITES = {
       { name: "curso-detalle", path: "/cursos/python-desde-cero" },
     ],
   },
-  sgtal: {
-    slug: "sgtal",
+  orbitra: {
+    slug: "orbitra",
     baseUrl: "http://localhost:3000",
     loginPath: "/login",
     loginFields: { email: "#email", password: "#pass", submitName: "Entrar" },
@@ -52,7 +52,7 @@ const SITES = {
     baseUrl: "http://127.0.0.1:4173",
     views: [
       { name: "home", path: "/" },
-      { name: "proyecto", path: "/proyectos/sgtal" },
+      { name: "proyecto", path: "/proyectos/orbitra" },
     ],
   },
 };

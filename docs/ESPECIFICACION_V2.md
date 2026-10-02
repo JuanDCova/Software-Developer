@@ -49,7 +49,7 @@ Salen de los repositorios locales de Juan David. Detalle en `app/data/projects.t
 | Proyecto              | Destacado | Autoría                                                                |
 | --------------------- | --------- | ---------------------------------------------------------------------- |
 | ERP Universitario     | Sí        | Equipo de 4; módulo académico, estudiantes, PDF, seguridad de sesiones |
-| SGTAL                 | Sí        | Autor único                                                            |
+| Orbitra (antes SGTAL) | Sí        | Autor único                                                            |
 | Nexora Platform       | Sí        | Propio, con partes hechas por Claude Code                              |
 | Palatsi Beauty OS     | No        | Mayormente generado por Claude Code; se muestra como dirección técnica |
 | Pracxu                | No        | Autor único, incluye SRS                                               |

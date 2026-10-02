@@ -1,7 +1,7 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 
-const pages = ["/", "/proyectos", "/proyectos/sgtal", "/proyectos/erp-educacion-superior", "/cv"];
+const pages = ["/", "/proyectos", "/proyectos/orbitra", "/proyectos/erp-educacion-superior", "/cv"];
 
 test.describe("home", () => {
   test("el hero dice quién es y qué hace, con los dos CTAs", async ({ page }) => {
@@ -59,9 +59,9 @@ test.describe("navegación", () => {
 
   test("de la lista de proyectos al detalle", async ({ page }) => {
     await page.goto("/proyectos");
-    await page.getByRole("link", { name: "SGTAL", exact: true }).click();
-    await expect(page).toHaveURL(/\/proyectos\/sgtal$/);
-    await expect(page.getByRole("heading", { level: 1 })).toHaveText("SGTAL");
+    await page.getByRole("link", { name: "Orbitra", exact: true }).click();
+    await expect(page).toHaveURL(/\/proyectos\/orbitra$/);
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText("Orbitra");
     await expect(page.getByRole("region", { name: "Mi rol" })).toBeVisible();
     await expect(page.getByRole("region", { name: "Arquitectura" })).toBeVisible();
   });
@@ -145,7 +145,7 @@ test.describe("interacción de escritorio", () => {
   test("la red de tecnologías muestra dónde se usó cada una", async ({ page }) => {
     await page.goto("/#stack");
     await page.locator("#stack").getByText("PostgreSQL", { exact: true }).first().hover();
-    await expect(page.getByText(/^PostgreSQL: .*SGTAL/)).toBeVisible();
+    await expect(page.getByText(/^PostgreSQL: .*Orbitra/)).toBeVisible();
   });
 
   test("el showcase de proyectos se fija y avanza en horizontal", async ({ page }) => {
@@ -220,22 +220,26 @@ test.describe("navegación desde la home con movimiento activo", () => {
   test("ir a un proyecto desde la red de tecnologías no rompe la página", async ({ page }) => {
     await page.goto("/");
     await expect(page.locator("#proyectos")).toHaveClass(/is-horizontal/);
-    await page.locator("#stack").getByRole("link", { name: "SGTAL", exact: true }).first().click();
-    await expect(page).toHaveURL(/\/proyectos\/sgtal$/);
+    await page
+      .locator("#stack")
+      .getByRole("link", { name: "Orbitra", exact: true })
+      .first()
+      .click();
+    await expect(page).toHaveURL(/\/proyectos\/orbitra$/);
     await expect(page.getByText("Algo salió mal")).toHaveCount(0);
   });
 });
 
 test.describe("capturas de proyectos", () => {
   test("la captura principal se abre en el visor y se navega con el teclado", async ({ page }) => {
-    await page.goto("/proyectos/sgtal");
+    await page.goto("/proyectos/orbitra");
     await page.getByRole("button", { name: "Ampliar captura: Panel principal" }).click();
-    const viewer = page.getByRole("dialog", { name: "Capturas de SGTAL" });
+    const viewer = page.getByRole("dialog", { name: "Capturas de Orbitra" });
     await expect(viewer).toBeVisible();
     await expect(viewer.getByText("Panel principal (1 de 3)")).toBeVisible();
     await page.keyboard.press("ArrowRight");
     await expect(viewer.getByText("Lista de órdenes (2 de 3)")).toBeVisible();
-    const image = viewer.getByRole("img", { name: /Lista de órdenes de SGTAL/ });
+    const image = viewer.getByRole("img", { name: /Lista de órdenes de Orbitra/ });
     await expect
       .poll(() => image.evaluate((img: HTMLImageElement) => img.naturalWidth))
       .toBeGreaterThan(0);

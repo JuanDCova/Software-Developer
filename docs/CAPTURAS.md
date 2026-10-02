@@ -23,14 +23,14 @@ docker compose -p lms-capturas exec backend python manage.py seed_data
 node scripts/captures.mjs --site=lms
 docker compose -p lms-capturas down
 
-# SGTAL (cargas por comandos)
-docker compose -p sgtal-capturas up -d --build    # en ../GCAL
-docker compose -p sgtal-capturas run --rm backend python manage.py migrate
-docker compose -p sgtal-capturas run --rm backend python manage.py cargar_base
-docker compose -p sgtal-capturas run --rm backend python manage.py cargar_demo
-docker compose -p sgtal-capturas run --rm backend python manage.py cargar_punta_a_punta
-node scripts/captures.mjs --site=sgtal
-docker compose -p sgtal-capturas down
+# Orbitra (cargas por comandos)
+docker compose -p orbitra-capturas up -d --build    # en ../GCAL
+docker compose -p orbitra-capturas run --rm backend python manage.py migrate
+docker compose -p orbitra-capturas run --rm backend python manage.py cargar_base
+docker compose -p orbitra-capturas run --rm backend python manage.py cargar_demo
+docker compose -p orbitra-capturas run --rm backend python manage.py cargar_punta_a_punta
+node scripts/captures.mjs --site=orbitra
+docker compose -p orbitra-capturas down
 
 # Portafolio (de sí mismo, sobre el build de producción)
 npm run build

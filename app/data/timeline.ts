@@ -40,9 +40,9 @@ export const timeline: Milestone[] = [
   },
   {
     date: "Sep 2026",
-    title: "Nexora Platform y SGTAL",
+    title: "Nexora Platform y Orbitra",
     detail: "LMS multi-tenant y trazabilidad logística con asistente de IA.",
-    slug: "sgtal",
+    slug: "orbitra",
   },
   {
     date: "Hoy",

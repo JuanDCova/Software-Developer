@@ -20,7 +20,7 @@ describe("proyectos", () => {
     const slugs = projects.map((project) => project.slug);
     expect(new Set(slugs).size).toBe(slugs.length);
     for (const slug of slugs) expect(slug).toMatch(/^[a-z0-9]+(-[a-z0-9]+)*$/);
-    expect(getProjectBySlug("sgtal")?.title).toBe("SGTAL");
+    expect(getProjectBySlug("orbitra")?.title).toBe("Orbitra");
   });
 
   it("hay exactamente tres destacados y todos traen arquitectura", () => {

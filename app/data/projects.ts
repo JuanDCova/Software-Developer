@@ -111,9 +111,9 @@ export const projects: Project[] = [
     },
   },
   {
-    id: "sgtal",
-    slug: "sgtal",
-    title: "SGTAL",
+    id: "orbitra",
+    slug: "orbitra",
+    title: "Orbitra",
     subtitle: "Trazabilidad de activos y logística para alquiler de equipos audiovisuales",
     description:
       "Plataforma que responde dónde está cada equipo, quién responde por él y cuándo debe volver, con control del gasto de insumos por orden.",
@@ -136,8 +136,8 @@ export const projects: Project[] = [
       "Nginx",
       "GitHub Actions",
     ],
-    image: "/proyectos/sgtal/dashboard-1440.webp",
-    gallery: ["/proyectos/sgtal/ordenes-1440.webp", "/proyectos/sgtal/logistica-1440.webp"],
+    image: "/proyectos/orbitra/dashboard-1440.webp",
+    gallery: ["/proyectos/orbitra/ordenes-1440.webp", "/proyectos/orbitra/logistica-1440.webp"],
     featured: true,
     status: "en-desarrollo",
     problem:
